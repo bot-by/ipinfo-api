@@ -24,6 +24,9 @@ import feign.RequestLine;
 @Headers("Accept: application/json")
 public interface Client {
 
+	public static final String REGULAR_URL = "http://ipinfo.io/";
+	public static final String SECURE_URL = "https://ipinfo.io/";
+
 	@RequestLine("GET /json")
 	String lookup();
 

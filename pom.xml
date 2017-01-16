@@ -3,14 +3,14 @@
 	<modelVersion>4.0.0</modelVersion>
 	
 	<groupId>ua.co.ur6lad</groupId>
-	<artifactId>ipinfo-client</artifactId>
+	<artifactId>ipinfo-api</artifactId>
 	<version>1.0.0-SNAPSHOT</version>
 	<packaging>jar</packaging>
 	
-	<name>ipinfo-client</name>
+	<name>ipinfo-api</name>
 	<description>Unofficial Java wrapper for ipinfo.io IP geolocation API.</description>
 	<inceptionYear>2017</inceptionYear>
-	<url>https://bitbucket.org/ur6lad/ipinfo-client/</url>
+	<url>https://bitbucket.org/ur6lad/ipinfo-api/</url>
 	<licenses>
 		<license>
 			<name>Apache 2</name>
@@ -31,13 +31,13 @@
 	</developers>
 	
 	<scm>
-		<connection>scm:hg:http://bitbucket.org/ur6lad/ipinfo-client</connection>
-		<developerConnection>scm:hg:https://ur6lad@bitbucket.org/ur6lad/ipinfo-client</developerConnection>
-		<url>http://bitbucket.org/ur6lad/ipinfo-client</url>
+		<connection>scm:hg:http://bitbucket.org/ur6lad/ipinfo-api</connection>
+		<developerConnection>scm:hg:https://ur6lad@bitbucket.org/ur6lad/ipinfo-api</developerConnection>
+		<url>http://bitbucket.org/ur6lad/ipinfo-api</url>
 	</scm>
 	<issueManagement>
 		<system>Bitbucket</system>
-		<url>https://bitbucket.org/ur6lad/ipinfo-client/issues</url>
+		<url>https://bitbucket.org/ur6lad/ipinfo-api/issues</url>
 	</issueManagement>
 	
 	<distributionManagement>

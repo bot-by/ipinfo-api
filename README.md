@@ -1,9 +1,9 @@
-# ipinfo.io client
+# ipinfo.io API
 
 Unofficial Java wrapper for [ipinfo.io](http://ipinfo.io "Comprehensive IP details website and API") IP geolocation API.
 
-[![Build Status](https://drone.io/bitbucket.org/ur6lad/ipinfo-client/status.png)](https://drone.io/bitbucket.org/ur6lad/ipinfo-client/latest)  
-[![codecov.io](http://codecov.io/bitbucket/ur6lad/ipinfo-client/coverage.svg?branch=default)](http://codecov.io/bitbucket/ur6lad/ipinfo-client?branch=default)
+[![Build Status](https://drone.io/bitbucket.org/ur6lad/ipinfo-api/status.png)](https://drone.io/bitbucket.org/ur6lad/ipinfo-api/latest)  
+[![codecov.io](http://codecov.io/bitbucket/ur6lad/ipinfo-api/coverage.svg?branch=default)](http://codecov.io/bitbucket/ur6lad/ipinfo-api?branch=default)
 
 ### What does it provide?
 
