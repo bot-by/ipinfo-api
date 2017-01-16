@@ -1,0 +1,137 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<project xmlns="http://maven.apache.org/POM/4.0.0" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 http://maven.apache.org/xsd/maven-4.0.0.xsd">
+	<modelVersion>4.0.0</modelVersion>
+	
+	<groupId>ua.co.ur6lad</groupId>
+	<artifactId>ipinfo-client</artifactId>
+	<version>1.0.0-SNAPSHOT</version>
+	<packaging>jar</packaging>
+	
+	<name>ipinfo-client</name>
+	<description>Unofficial Java wrapper for ipinfo.io IP geolocation API.</description>
+	<inceptionYear>2017</inceptionYear>
+	<url>https://bitbucket.org/ur6lad/ipinfo-client/</url>
+	<licenses>
+		<license>
+			<name>Apache 2</name>
+			<url>http://www.apache.org/licenses/LICENSE-2.0.txt</url>
+			<distribution>repo</distribution>
+			<comments>See LICENSE</comments>
+		</license>
+	</licenses>
+	
+	<developers>
+		<developer>
+			<id>ur6lad</id>
+			<name>Vitaliy Berdinskikh</name>
+			<email>ur6lad@gmail.com</email>
+			<url>http://ur6lad.co.ua/</url>
+			<timezone>Europe/Kyiv</timezone>
+		</developer>
+	</developers>
+	
+	<scm>
+		<connection>scm:hg:http://bitbucket.org/ur6lad/ipinfo-client</connection>
+		<developerConnection>scm:hg:https://ur6lad@bitbucket.org/ur6lad/ipinfo-client</developerConnection>
+		<url>http://bitbucket.org/ur6lad/ipinfo-client</url>
+	</scm>
+	<issueManagement>
+		<system>Bitbucket</system>
+		<url>https://bitbucket.org/ur6lad/ipinfo-client/issues</url>
+	</issueManagement>
+	
+	<distributionManagement>
+		<repository>
+			<id>oss-jfrog-artifactory</id>
+			<name>oss-jfrog-artifactory-releases</name>
+			<url>http://oss.jfrog.org/artifactory/oss-release-local</url>
+		</repository>
+		<snapshotRepository>
+			<id>oss-jfrog-artifactory</id>
+			<name>oss-jfrog-artifactory-snapshots</name>
+			<url>http://oss.jfrog.org/artifactory/oss-snapshot-local</url>
+		</snapshotRepository>
+	</distributionManagement>
+	
+	<properties>
+		<project.build.sourceEncoding>UTF-8</project.build.sourceEncoding>
+		<project.reporting.outputEncoding>UTF-8</project.reporting.outputEncoding>
+		<targetJdk>1.8</targetJdk>
+		<jackson.version>[2.8.0,)</jackson.version>
+	</properties>
+	
+	<dependencies>
+		<dependency>
+			<groupId>io.github.openfeign</groupId>
+			<artifactId>feign-core</artifactId>
+			<version>[9.4.0,)</version>
+		</dependency>
+		<dependency>
+			<groupId>com.fasterxml.jackson.core</groupId>
+			<artifactId>jackson-annotations</artifactId>
+			<version>${jackson.version}</version>
+		</dependency>
+		<dependency>
+			<groupId>com.fasterxml.jackson.core</groupId>
+			<artifactId>jackson-databind</artifactId>
+			<version>${jackson.version}</version>
+		</dependency>
+		<dependency>
+			<groupId>org.slf4j</groupId>
+			<artifactId>slf4j-api</artifactId>
+			<version>[1.7.7,)</version>
+		</dependency>
+		<dependency>
+			<groupId>junit</groupId>
+			<artifactId>junit</artifactId>
+			<version>4.12</version>
+			<scope>test</scope>
+		</dependency>
+		<dependency>
+			<groupId>org.mockito</groupId>
+			<artifactId>mockito-core</artifactId>
+			<version>2.6.1</version>
+			<scope>test</scope>
+		</dependency>
+	</dependencies>
+	
+	<build>
+		<resources>
+			<resource>
+				<directory>src/main/resources</directory>
+				<filtering>true</filtering>
+			</resource>
+			<resource>
+				<directory>${basedir}</directory>
+				<includes>
+					<include>LICENSE</include>
+					<include>NOTICE</include>
+				</includes>
+				<targetPath>META-INF</targetPath>
+			</resource>
+		</resources>
+		<plugins>
+			<plugin>
+				<groupId>org.apache.maven.plugins</groupId>
+				<artifactId>maven-compiler-plugin</artifactId>
+				<version>3.6.0</version>
+				<configuration>
+					<source>${targetJdk}</source>
+					<target>${targetJdk}</target>
+				</configuration>
+			</plugin>
+			<plugin>
+				<groupId>org.apache.maven.plugins</groupId>
+				<artifactId>maven-jar-plugin</artifactId>
+				<version>2.6</version>
+				<configuration>
+					<archive>
+						<manifestEntries>
+							<Built-By>${project.developers[0].id}</Built-By>
+						</manifestEntries>
+					</archive>
+				</configuration>
+			</plugin>
+		</plugins>
+	</build>
+</project>
