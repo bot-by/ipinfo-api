@@ -2,8 +2,6 @@
 
 Unofficial Java wrapper for [ipinfo.io][] IP geolocation API. 
 
-[![CircleCI](https://circleci.com/gh/ur6lad/ipinfo-api.svg?style=svg)](https://circleci.com/gh/ur6lad/ipinfo-api)
-
 ## Usage
 
 It can look up:
