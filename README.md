@@ -36,5 +36,4 @@ See the **CONTRIBUTING.md** document.
 [ipinfo.io]: http://ipinfo.io "Comprehensive IP details website and API"
 [Feign]: https://github.com/OpenFeign/feign "Feign makes writing java http clients easier"
 [Hystrix]: https://github.com/Netflix/Hystrix "Fault tolerance library"
-[OkHttp]: https://github.com/square/okhttp "HTTP+HTTP/2 client for Java"
-[CONTRIBUTING.md]: 
+[OkHttp]: https://github.com/square/okhttp "HTTP+HTTP/2 client for Java" 
