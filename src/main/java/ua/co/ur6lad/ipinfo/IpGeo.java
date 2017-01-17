@@ -16,14 +16,12 @@ package ua.co.ur6lad.ipinfo;
  * limitations under the License.
  */
 
-public class IpInfo {
+public class IpGeo {
 
 	private String city;
 	private String country;
-	private String hostname;
 	private String ip;
 	private String loc;
-	private String org;
 	private String postal;
 	private String region;
 
@@ -43,14 +41,6 @@ public class IpInfo {
 		this.country = country;
 	}
 
-	public String getHostname() {
-		return hostname;
-	}
-
-	public void setHostname(String hostname) {
-		this.hostname = hostname;
-	}
-
 	public String getIp() {
 		return ip;
 	}
@@ -65,14 +55,6 @@ public class IpInfo {
 
 	public void setLoc(String loc) {
 		this.loc = loc;
-	}
-
-	public String getOrg() {
-		return org;
-	}
-
-	public void setOrg(String org) {
-		this.org = org;
 	}
 
 	public String getPostal() {
@@ -96,12 +78,10 @@ public class IpInfo {
 
 		builder.append("{ ip: ").append(getIp());
 		builder.append(", country: ").append(getCountry());
-		builder.append(", hostname: ").append(getHostname());
 		builder.append(", region: ").append(getRegion());
 		builder.append(", city: ").append(getCity());
 		builder.append(", loc: ").append(getLoc());
-		builder.append(", postal: ").append(getPostal());
-		builder.append(", org: ").append(getOrg()).append(" }");
+		builder.append(", postal: ").append(getPostal()).append(" }");
 
 		return builder.toString();
 	}

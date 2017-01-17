@@ -7,7 +7,7 @@ package ua.co.ur6lad.ipinfo;
  * you may not use this file except in compliance with the License.
  * You may obtain a copy of the License at
  *
- *    http://www.apache.org/licenses/LICENSE-2.0
+ *	  http://www.apache.org/licenses/LICENSE-2.0
  *
  * Unless required by applicable law or agreed to in writing, software
  * distributed under the License is distributed on an "AS IS" BASIS,
@@ -20,17 +20,25 @@ import feign.Headers;
 import feign.Param;
 import feign.RequestLine;
 
-
+/**
+ * See http://ipinfo.io/developers
+ */
 @Headers("Accept: application/json")
-public interface Client {
+public interface IpInfoClient {
 
 	public static final String REGULAR_URL = "http://ipinfo.io/";
 	public static final String SECURE_URL = "https://ipinfo.io/";
 
 	@RequestLine("GET /json")
-	String lookup();
+	IpInfo lookup();
 
 	@RequestLine("GET /{ip}/json")
-	String lookup(@Param("ip") String address);
+	IpInfo lookup(@Param("ip") String address);
+
+	@RequestLine("GET /geo")
+	IpGeo lookupGeo();
+
+	@RequestLine("GET /{ip}/geo")
+	IpGeo lookupGeo(@Param("ip") String address);
 
 }
