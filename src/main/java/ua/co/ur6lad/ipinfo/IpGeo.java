@@ -16,6 +16,11 @@ package ua.co.ur6lad.ipinfo;
  * limitations under the License.
  */
 
+import com.fasterxml.jackson.annotation.JsonCreator;
+import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
+import com.fasterxml.jackson.annotation.JsonProperty;
+
+@JsonIgnoreProperties(ignoreUnknown = true)
 public class IpGeo {
 
 	private String city;
@@ -25,52 +30,58 @@ public class IpGeo {
 	private String postal;
 	private String region;
 
-	public String getCity() {
-		return city;
+	@JsonCreator
+	public IpGeo(@JsonProperty("city") String city, @JsonProperty("country") String country, @JsonProperty("ip") String ip,
+			@JsonProperty("loc") String loc, @JsonProperty("postal") String postal, @JsonProperty("region") String region) {
+		this.city = city;
+		this.country = country;
+		this.ip = ip;
+		this.loc = loc;
+		this.postal = postal;
+		this.region = region;
 	}
 
-	public void setCity(String city) {
-		this.city = city;
+	public String getCity() {
+		return city;
 	}
 
 	public String getCountry() {
 		return country;
 	}
 
-	public void setCountry(String country) {
-		this.country = country;
-	}
-
 	public String getIp() {
 		return ip;
-	}
-
-	public void setIp(String ip) {
-		this.ip = ip;
 	}
 
 	public String getLoc() {
 		return loc;
 	}
 
-	public void setLoc(String loc) {
-		this.loc = loc;
-	}
-
 	public String getPostal() {
 		return postal;
-	}
-
-	public void setPostal(String postal) {
-		this.postal = postal;
 	}
 
 	public String getRegion() {
 		return region;
 	}
 
-	public void setRegion(String region) {
-		this.region = region;
+	@Override
+	public boolean equals(Object obj) {
+		if (this == obj) return true;
+		if (obj instanceof IpInfo) {
+			IpInfo info = (IpInfo) obj;
+
+			if (null != getIp()) {
+				return getIp().equals(info.getIp());
+			}
+		}
+
+		return false;
+	}
+
+	@Override
+	public int hashCode() {
+		return null == getIp()? super.hashCode() : getIp().hashCode();
 	}
 
 	public String toString() {

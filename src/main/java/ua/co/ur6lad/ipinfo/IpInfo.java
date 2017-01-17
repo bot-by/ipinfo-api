@@ -16,87 +16,39 @@ package ua.co.ur6lad.ipinfo;
  * limitations under the License.
  */
 
-public class IpInfo {
+import com.fasterxml.jackson.annotation.JsonCreator;
+import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
+import com.fasterxml.jackson.annotation.JsonProperty;
 
-	private String city;
-	private String country;
+@JsonIgnoreProperties(ignoreUnknown = true)
+public class IpInfo extends IpGeo {
+
 	private String hostname;
-	private String ip;
-	private String loc;
 	private String org;
-	private String postal;
-	private String region;
 
-	public String getCity() {
-		return city;
-	}
-
-	public void setCity(String city) {
-		this.city = city;
-	}
-
-	public String getCountry() {
-		return country;
-	}
-
-	public void setCountry(String country) {
-		this.country = country;
+	@JsonCreator
+	public IpInfo(@JsonProperty("city") String city, @JsonProperty("country") String country, @JsonProperty("ip") String ip,
+			@JsonProperty("loc") String loc, @JsonProperty("postal") String postal, @JsonProperty("region") String region,
+			@JsonProperty("hostname") String hostname, @JsonProperty("org") String org) {
+		super(city, country, ip, loc, postal, region);
+		this.hostname = hostname;
+		this.org = org;
 	}
 
 	public String getHostname() {
 		return hostname;
 	}
 
-	public void setHostname(String hostname) {
-		this.hostname = hostname;
-	}
-
-	public String getIp() {
-		return ip;
-	}
-
-	public void setIp(String ip) {
-		this.ip = ip;
-	}
-
-	public String getLoc() {
-		return loc;
-	}
-
-	public void setLoc(String loc) {
-		this.loc = loc;
-	}
-
 	public String getOrg() {
 		return org;
-	}
-
-	public void setOrg(String org) {
-		this.org = org;
-	}
-
-	public String getPostal() {
-		return postal;
-	}
-
-	public void setPostal(String postal) {
-		this.postal = postal;
-	}
-
-	public String getRegion() {
-		return region;
-	}
-
-	public void setRegion(String region) {
-		this.region = region;
 	}
 
 	public String toString() {
 		StringBuilder builder = new StringBuilder(this.getClass().getSimpleName());
 
 		builder.append("{ ip: ").append(getIp());
-		builder.append(", country: ").append(getCountry());
 		builder.append(", hostname: ").append(getHostname());
+		builder.append(", country: ").append(getCountry());
 		builder.append(", region: ").append(getRegion());
 		builder.append(", city: ").append(getCity());
 		builder.append(", loc: ").append(getLoc());

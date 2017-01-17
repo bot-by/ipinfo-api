@@ -1,0 +1,8 @@
+machine:
+  java:
+    version: openjdk8
+  timezone:
+    Europe/Kiev
+test:
+  override:
+    - echo "tests are skipped"
