@@ -12,8 +12,9 @@ It can look up:
 * any IP info,
 * short (geo) IP info.
 
-Just build a client with [Feign][] and [Hystrix][] or [OkHttp][] or _your love provider_. Feel free to use `IpInfoClientIT` as start point.
+Just build a client with [Feign][] and [Hystrix][] or [OkHttp][] or _your love provider_. Feel free to start with `IpInfoClientIT`.
 
+	:::java
 	IpInfoClient client = HystrixFeign.builder()
 			.decoder(new JacksonDecoder())
 			.target(IpInfoClient.class, IpInfoClient.REGULAR_URL);
