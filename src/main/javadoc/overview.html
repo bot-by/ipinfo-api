@@ -1,0 +1,39 @@
+<!doctype html>
+<html lang="en">
+	<head>
+		<meta charset="utf-8"/>
+		<title>IpInfo #Java API</title>
+		<meta name="description" content="Unofficial Java wrapper for ipinfo.io IP geolocation API."/>
+		<meta name="author" content="Vitaliy Berdinskikh"/>
+	</head>
+	<body>
+		<p>Unofficial Java wrapper for <a href="http://ipinfo.io" title="Comprehensive IP details website and API">ipinfo.io</a> IP geolocation API. </p>
+		<h2>Usage</h2>
+		<p>It can look up:</p>
+		<ul>
+			<li>own IP info,</li>
+			<li>any IP info,</li>
+			<li>short (geo) IP info.</li>
+		</ul>
+		<p>Just build a client with <a href="https://github.com/OpenFeign/feign" title="Feign makes writing java http clients easier">Feign</a> and <a href="https://github.com/Netflix/Hystrix" title="Fault tolerance library">Hystrix</a> or <a href="https://github.com/square/okhttp" title="HTTP+HTTP/2 client for Java">OkHttp</a>.</p>
+		<pre>
+			<code>
+	IpInfoClient client = HystrixFeign.builder()
+			.decoder(new JacksonDecoder())
+			.target(IpInfoClient.class, IpInfoClient.REGULAR_URL);
+	IpInfo info = client.lookup();
+
+	log.info("my IP {}", info.getIp());
+			</code>
+		</pre>
+		<h2>License</h2>
+		<p>
+			<code>ipinfo-api</code> is licensed under the <strong>Apache License v2.0</strong>
+		</p>
+		<p>
+			<a href="http://www.apache.org/licenses/LICENSE-2.0.html">
+				<img src="https://img.shields.io/badge/license-Apache%202.0-blue.svg?style=flat" alt="License"/>
+			</a>
+		</p>
+	</body>
+</html>

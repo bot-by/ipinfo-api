@@ -20,6 +20,14 @@ import com.fasterxml.jackson.annotation.JsonCreator;
 import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
 import com.fasterxml.jackson.annotation.JsonProperty;
 
+/**
+ * Short IP details bean.
+ *
+ * See IpInfo's <a href="https://ipinfo.io/developers/specific-fields">Specific fields</a>.
+ *
+ * @since 1.0.0
+ * @author Vitaliy Berdinskikh
+ */
 @JsonIgnoreProperties(ignoreUnknown = true)
 public class IpGeo {
 
@@ -44,7 +52,7 @@ public class IpGeo {
 		this.region = region;
 	}
 
-	public boolean getBogon() {
+	public boolean isBogon() {
 		return bogon;
 	}
 
@@ -75,8 +83,8 @@ public class IpGeo {
 	@Override
 	public boolean equals(Object obj) {
 		if (this == obj) return true;
-		if (obj instanceof IpInfo) {
-			IpInfo info = (IpInfo) obj;
+		if (obj instanceof IpGeo) {
+			IpGeo info = (IpGeo) obj;
 
 			if (null != getIp()) {
 				return getIp().equals(info.getIp());
@@ -88,14 +96,14 @@ public class IpGeo {
 
 	@Override
 	public int hashCode() {
-		return null == getIp()? super.hashCode() : getIp().hashCode();
+		return null == getIp() ? 0 : getIp().hashCode() + 3;
 	}
 
 	public String toString() {
 		StringBuilder builder = new StringBuilder(this.getClass().getSimpleName());
 
 		builder.append("{ ip: ").append(getIp());
-		builder.append(", bogon: ").append(getBogon());
+		builder.append(", bogon: ").append(isBogon());
 		builder.append(", country: ").append(getCountry());
 		builder.append(", region: ").append(getRegion());
 		builder.append(", city: ").append(getCity());

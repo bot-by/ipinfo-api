@@ -20,6 +20,14 @@ import com.fasterxml.jackson.annotation.JsonCreator;
 import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
 import com.fasterxml.jackson.annotation.JsonProperty;
 
+/**
+ * Full IP details bean.
+ *
+ * See IpInfo's <a href="https://ipinfo.io/developers/full-ip-details">Full IP details</a>.
+ *
+ * @since 1.0.0
+ * @author Vitaliy Berdinskikh
+ */
 @JsonIgnoreProperties(ignoreUnknown = true)
 public class IpInfo extends IpGeo {
 
@@ -50,11 +58,30 @@ public class IpInfo extends IpGeo {
 		return phone;
 	}
 
+	@Override
+	public boolean equals(Object obj) {
+		if (this == obj) return true;
+		if (obj instanceof IpInfo) {
+			IpInfo info = (IpInfo) obj;
+
+			if (null != getIp()) {
+				return getIp().equals(info.getIp());
+			}
+		}
+
+		return false;
+	}
+
+	@Override
+	public int hashCode() {
+		return null == getIp() ? 0 : getIp().hashCode() + 4;
+	}
+
 	public String toString() {
 		StringBuilder builder = new StringBuilder(this.getClass().getSimpleName());
 
 		builder.append("{ ip: ").append(getIp());
-		builder.append(", bogon: ").append(getBogon());
+		builder.append(", bogon: ").append(isBogon());
 		builder.append(", hostname: ").append(getHostname());
 		builder.append(", country: ").append(getCountry());
 		builder.append(", region: ").append(getRegion());

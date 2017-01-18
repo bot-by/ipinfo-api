@@ -10,7 +10,7 @@ It can look up:
 * any IP info,
 * short (geo) IP info.
 
-Just build a client with [Feign][] and [Hystrix][] or [OkHttp][] or _your love provider_.
+Just build a client with [Feign][] and [Hystrix][] or [OkHttp][].
 
 ```java
 IpInfoClient client = HystrixFeign.builder()

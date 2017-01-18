@@ -21,23 +21,50 @@ import feign.Param;
 import feign.RequestLine;
 
 /**
- * See http://ipinfo.io/developers
+ * A class representing a client of <a href="http://ipinfo.io/">IpInfo</a> service.
+ *
+ * See IpInfo's <a href="http://ipinfo.io/developers">Developer Documentation</a>.
+ *
+ * @since 1.0.0
+ * @author Vitaliy Berdinskikh
  */
 @Headers("Accept: application/json")
 public interface IpInfoClient {
 
-	public static final String REGULAR_URL = "http://ipinfo.io/";
-	public static final String SECURE_URL = "https://ipinfo.io/";
+	String REGULAR_URL = "http://ipinfo.io/";
+	String SECURE_URL = "https://ipinfo.io/";
 
+	/**
+	 * Get full details about own IP.
+	 *
+	 * @return IP details
+	 */
 	@RequestLine("GET /json")
 	IpInfo lookup();
 
+	/**
+	 * Get full details about the target IP.
+	 *
+	 * @param address target IP
+	 * @return IP details
+	 */
 	@RequestLine("GET /{ip}/json")
 	IpInfo lookup(@Param("ip") String address);
 
+	/**
+	 * Get short details about own IP.
+	 *
+	 * @return IP details
+	 */
 	@RequestLine("GET /geo")
 	IpGeo lookupGeo();
 
+	/**
+	 * Get short details about the target IP.
+	 *
+	 * @param address target IP
+	 * @return IP details
+	 */
 	@RequestLine("GET /{ip}/geo")
 	IpGeo lookupGeo(@Param("ip") String address);
 

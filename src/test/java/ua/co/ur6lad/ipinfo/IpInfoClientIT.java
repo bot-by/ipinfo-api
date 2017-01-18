@@ -44,7 +44,7 @@ public class IpInfoClientIT {
 		IpGeo geo = client.lookupGeo(LOOPBACK_IP_ADDRESS);
 
 		assertEquals("Bogon IP address", LOOPBACK_IP_ADDRESS, geo.getIp());
-		assertTrue("Loopback", geo.getBogon());
+		assertTrue("Loopback", geo.isBogon());
 	}
 
 	@Test
@@ -52,7 +52,7 @@ public class IpInfoClientIT {
 		IpGeo geo = client.lookupGeo(GOOGLE_DNS_IP_ADDRESS);
 
 		assertEquals("Google Public DNS IP address", GOOGLE_DNS_IP_ADDRESS, geo.getIp());
-		assertFalse("Reserved IP", geo.getBogon());
+		assertFalse("Reserved IP", geo.isBogon());
 	}
 
 	@Test
@@ -60,7 +60,7 @@ public class IpInfoClientIT {
 		IpInfo info = client.lookup(GOOGLE_DNS_IP_ADDRESS);
 
 		assertEquals("Google Public DNS IP address", GOOGLE_DNS_IP_ADDRESS, info.getIp());
-		assertFalse("Reserved IP", info.getBogon());
+		assertFalse("Reserved IP", info.isBogon());
 	}
 
 	@Test
@@ -68,7 +68,7 @@ public class IpInfoClientIT {
 		IpInfo info = client.lookup();
 
 		assertNotNull("Own IP", info.getIp());
-		assertFalse("Reserved IP", info.getBogon());
+		assertFalse("Reserved IP", info.isBogon());
 	}
 
 	@Before
