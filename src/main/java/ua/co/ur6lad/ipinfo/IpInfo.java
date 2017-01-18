@@ -25,14 +25,17 @@ public class IpInfo extends IpGeo {
 
 	private String hostname;
 	private String org;
+	private String phone;
 
 	@JsonCreator
-	public IpInfo(@JsonProperty("city") String city, @JsonProperty("country") String country, @JsonProperty("ip") String ip,
-			@JsonProperty("loc") String loc, @JsonProperty("postal") String postal, @JsonProperty("region") String region,
-			@JsonProperty("hostname") String hostname, @JsonProperty("org") String org) {
-		super(city, country, ip, loc, postal, region);
+	public IpInfo(@JsonProperty("bogon") boolean bogon, @JsonProperty("city") String city, @JsonProperty("country") String country,
+			@JsonProperty("ip") String ip, @JsonProperty("loc") String loc, @JsonProperty("postal") String postal,
+			@JsonProperty("region") String region, @JsonProperty("hostname") String hostname, @JsonProperty("org") String org,
+			@JsonProperty("phone") String phone) {
+		super(bogon, city, country, ip, loc, postal, region);
 		this.hostname = hostname;
 		this.org = org;
+		this.phone = phone;
 	}
 
 	public String getHostname() {
@@ -43,17 +46,23 @@ public class IpInfo extends IpGeo {
 		return org;
 	}
 
+	public String getPhone() {
+		return phone;
+	}
+
 	public String toString() {
 		StringBuilder builder = new StringBuilder(this.getClass().getSimpleName());
 
 		builder.append("{ ip: ").append(getIp());
+		builder.append(", bogon: ").append(getBogon());
 		builder.append(", hostname: ").append(getHostname());
 		builder.append(", country: ").append(getCountry());
 		builder.append(", region: ").append(getRegion());
 		builder.append(", city: ").append(getCity());
 		builder.append(", loc: ").append(getLoc());
 		builder.append(", postal: ").append(getPostal());
-		builder.append(", org: ").append(getOrg()).append(" }");
+		builder.append(", org: ").append(getOrg());
+		builder.append(", phone: ").append(getPhone()).append(" }");
 
 		return builder.toString();
 	}

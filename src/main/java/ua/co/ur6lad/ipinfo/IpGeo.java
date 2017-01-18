@@ -23,6 +23,7 @@ import com.fasterxml.jackson.annotation.JsonProperty;
 @JsonIgnoreProperties(ignoreUnknown = true)
 public class IpGeo {
 
+	private boolean bogon;
 	private String city;
 	private String country;
 	private String ip;
@@ -31,14 +32,20 @@ public class IpGeo {
 	private String region;
 
 	@JsonCreator
-	public IpGeo(@JsonProperty("city") String city, @JsonProperty("country") String country, @JsonProperty("ip") String ip,
-			@JsonProperty("loc") String loc, @JsonProperty("postal") String postal, @JsonProperty("region") String region) {
+	public IpGeo(@JsonProperty("bogon") boolean bogon, @JsonProperty("city") String city, @JsonProperty("country") String country,
+			@JsonProperty("ip") String ip, @JsonProperty("loc") String loc, @JsonProperty("postal") String postal,
+			@JsonProperty("region") String region) {
+		this.bogon = bogon;
 		this.city = city;
 		this.country = country;
 		this.ip = ip;
 		this.loc = loc;
 		this.postal = postal;
 		this.region = region;
+	}
+
+	public boolean getBogon() {
+		return bogon;
 	}
 
 	public String getCity() {
@@ -88,6 +95,7 @@ public class IpGeo {
 		StringBuilder builder = new StringBuilder(this.getClass().getSimpleName());
 
 		builder.append("{ ip: ").append(getIp());
+		builder.append(", bogon: ").append(getBogon());
 		builder.append(", country: ").append(getCountry());
 		builder.append(", region: ").append(getRegion());
 		builder.append(", city: ").append(getCity());
