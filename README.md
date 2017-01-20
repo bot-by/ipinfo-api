@@ -15,7 +15,7 @@ Just build a client with [Feign][] and [Hystrix][] or [OkHttp][].
 ```java
 IpInfoClient client = HystrixFeign.builder()
 		.decoder(new JacksonDecoder())
-		.target(IpInfoClient.class, IpInfoClient.REGULAR_URL);
+		.target(IpInfoClient.class, "http://ipinfo.io/");
 IpInfo info = client.lookup();
 
 log.info("my IP {}", info.getIp());

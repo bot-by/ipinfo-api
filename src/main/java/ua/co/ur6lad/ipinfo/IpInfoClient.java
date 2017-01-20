@@ -32,9 +32,6 @@ import feign.Response;
 @Headers("Accept: application/json")
 public interface IpInfoClient {
 
-	String REGULAR_URL = "http://ipinfo.io/";
-	String SECURE_URL = "https://ipinfo.io/";
-
 	/**
 	 * Get full details about own IP.
 	 *

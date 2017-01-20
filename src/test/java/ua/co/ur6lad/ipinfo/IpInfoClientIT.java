@@ -105,7 +105,7 @@ public class IpInfoClientIT {
 				.logLevel(Level.BASIC)
 				.logger(new Slf4jLogger())
 				.decoder(new JacksonDecoder(mapper))
-				.target(IpInfoClient.class, IpInfoClient.REGULAR_URL);
+				.target(IpInfoClient.class, "http://ipinfo.io/");
 	}
 
 }

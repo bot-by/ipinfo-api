@@ -17,6 +17,7 @@ package ua.co.ur6lad.ipinfo;
  */
 
 public enum IpInfoField {
+
 	City, Country, Hostname, Ip, Loc, Org, Postal, Region;
 
 	public String toString() {

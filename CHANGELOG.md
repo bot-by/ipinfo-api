@@ -6,7 +6,6 @@ and this project adheres to [Semantic Versioning](http://semver.org/).
 
 ## 1.0.0
 ### Added
-- Client interface.
-- Full (info) and short (geo) beans.
-- Integration tests.
-
+- Add client interface.
+- Add full (info) and short (geo) beans.
+- Add methods to request a specific field only.
