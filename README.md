@@ -27,6 +27,10 @@ If you need only one field.
 log.info("now I am at {}", client.lookupField(IpInfoField.Country));
 ```
 
+[![Maven Central](https://img.shields.io/maven-central/v/ua.co.ur6lad/ipinfo-api.svg)](http://search.maven.org/#search%7Cga%7C1%7Cg%3A%22ua.co.ur6lad%22%20AND%20a%3A%22ipinfo-api%22)
+
+[![Download](https://api.bintray.com/packages/ur6lad/maven/ipinfo-api/images/download.svg?version=1.0.0) ](https://bintray.com/ur6lad/maven/ipinfo-api/1.0.0/link)
+
 ## To Do
 
 * Add token for paid plans of [ipinfo.io][].

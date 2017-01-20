@@ -4,7 +4,7 @@
 	
 	<groupId>ua.co.ur6lad</groupId>
 	<artifactId>ipinfo-api</artifactId>
-	<version>1.0.0-SNAPSHOT</version>
+	<version>1.0.0</version>
 	<packaging>jar</packaging>
 	
 	<name>ipinfo-api</name>
@@ -42,9 +42,9 @@
 	
 	<distributionManagement>
 		<repository>
-			<id>oss-jfrog-artifactory</id>
-			<name>oss-jfrog-artifactory-releases</name>
-			<url>http://oss.jfrog.org/artifactory/oss-release-local</url>
+			<id>bintray-ur6lad-maven</id>
+			<name>ur6lad-maven</name>
+			<url>https://api.bintray.com/maven/ur6lad/maven/ipinfo-api/;publish=1l</url>
 		</repository>
 		<snapshotRepository>
 			<id>oss-jfrog-artifactory</id>
