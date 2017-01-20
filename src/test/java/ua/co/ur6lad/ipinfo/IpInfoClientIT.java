@@ -19,10 +19,15 @@ package ua.co.ur6lad.ipinfo;
 import com.fasterxml.jackson.databind.DeserializationFeature;
 import com.fasterxml.jackson.databind.ObjectMapper;
 
+import feign.Response;
 import feign.Logger.Level;
 import feign.hystrix.HystrixFeign;
 import feign.jackson.JacksonDecoder;
 import feign.slf4j.Slf4jLogger;
+
+import java.io.BufferedReader;
+import java.io.IOException;
+import java.util.stream.Collectors;
 
 import org.junit.Before;
 import org.junit.Test;
@@ -69,6 +74,26 @@ public class IpInfoClientIT {
 
 		assertNotNull("Own IP", info.getIp());
 		assertFalse("Reserved IP", info.isBogon());
+	}
+
+	@Test
+	public void getIp() throws IOException {
+		Response response = client.lookupField(LOOPBACK_IP_ADDRESS, IpInfoField.Ip);
+
+		assertNotNull("Own IP", response);
+		assertEquals("HTTP 200 OK", 200, response.status());
+		BufferedReader bodyReader = new BufferedReader(response.body().asReader());
+		assertEquals("Loopback", LOOPBACK_IP_ADDRESS, bodyReader.lines().collect(Collectors.joining("\n")));
+	}
+
+	@Test
+	public void getCountry() throws IOException {
+		Response response = client.lookupField(GOOGLE_DNS_IP_ADDRESS, IpInfoField.Country);
+
+		assertNotNull("Own IP", response);
+		assertEquals("HTTP 200 OK", 200, response.status());
+		BufferedReader bodyReader = new BufferedReader(response.body().asReader());
+		assertEquals("US", "US", bodyReader.lines().collect(Collectors.joining("\n")));
 	}
 
 	@Before

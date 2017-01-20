@@ -19,6 +19,7 @@ package ua.co.ur6lad.ipinfo;
 import feign.Headers;
 import feign.Param;
 import feign.RequestLine;
+import feign.Response;
 
 /**
  * A class representing a client of <a href="http://ipinfo.io/">IpInfo</a> service.
@@ -67,5 +68,24 @@ public interface IpInfoClient {
 	 */
 	@RequestLine("GET /{ip}/geo")
 	IpGeo lookupGeo(@Param("ip") String address);
+
+	/**
+	 * Get a specific field.
+	 *
+	 * @param field a specific field
+	 * @return value of a specific field
+	 */
+	@RequestLine("GET /{field}")
+	Response lookupField(@Param("field") IpInfoField field);
+
+	/**
+	 * Get a specific field of the target IP.
+	 *
+	 * @param address target IP
+	 * @param field a specific field
+	 * @return value of a specific field
+	 */
+	@RequestLine("GET /{ip}/{field}")
+	Response lookupField(@Param("ip") String address, @Param("field") IpInfoField field);
 
 }

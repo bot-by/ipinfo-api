@@ -21,6 +21,16 @@ IpInfo info = client.lookup();
 log.info("my IP {}", info.getIp());
 ```
 
+If you need only one field.
+
+```java
+log.info("now I am at {}", client.lookupField(IpInfoField.Country));
+```
+
+## To Do
+
+* Add token for paid plans of [ipinfo.io][].
+
 ## License
 
 `ipinfo-api` is licensed under the **Apache License v2.0**

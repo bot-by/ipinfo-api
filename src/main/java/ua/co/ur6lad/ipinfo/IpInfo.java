@@ -33,17 +33,14 @@ public class IpInfo extends IpGeo {
 
 	private String hostname;
 	private String org;
-	private String phone;
 
 	@JsonCreator
 	public IpInfo(@JsonProperty("bogon") boolean bogon, @JsonProperty("city") String city, @JsonProperty("country") String country,
 			@JsonProperty("ip") String ip, @JsonProperty("loc") String loc, @JsonProperty("postal") String postal,
-			@JsonProperty("region") String region, @JsonProperty("hostname") String hostname, @JsonProperty("org") String org,
-			@JsonProperty("phone") String phone) {
+			@JsonProperty("region") String region, @JsonProperty("hostname") String hostname, @JsonProperty("org") String org) {
 		super(bogon, city, country, ip, loc, postal, region);
 		this.hostname = hostname;
 		this.org = org;
-		this.phone = phone;
 	}
 
 	public String getHostname() {
@@ -52,10 +49,6 @@ public class IpInfo extends IpGeo {
 
 	public String getOrg() {
 		return org;
-	}
-
-	public String getPhone() {
-		return phone;
 	}
 
 	@Override
@@ -88,8 +81,7 @@ public class IpInfo extends IpGeo {
 		builder.append(", city: ").append(getCity());
 		builder.append(", loc: ").append(getLoc());
 		builder.append(", postal: ").append(getPostal());
-		builder.append(", org: ").append(getOrg());
-		builder.append(", phone: ").append(getPhone()).append(" }");
+		builder.append(", org: ").append(getOrg()).append(" }");
 
 		return builder.toString();
 	}
