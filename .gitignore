@@ -1,9 +1,11 @@
 *~
+*.iml
 *.marks
 *.releaseBackup
 \#*\#
 
-target
+/target/
+/.idea/
 .classpath
 .project
 .settings

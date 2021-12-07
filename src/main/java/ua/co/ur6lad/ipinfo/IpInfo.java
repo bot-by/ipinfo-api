@@ -1,7 +1,7 @@
 package ua.co.ur6lad.ipinfo;
 
 /*
- * Copyright 2017 Vitaliy Berdinskikh
+ * Copyright 2017,2021 Witalij Berdinskich
  *
  * Licensed under the Apache License, Version 2.0 (the "License");
  * you may not use this file except in compliance with the License.
@@ -20,19 +20,21 @@ import com.fasterxml.jackson.annotation.JsonCreator;
 import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
 import com.fasterxml.jackson.annotation.JsonProperty;
 
+import java.util.StringJoiner;
+
 /**
  * Full IP details bean.
  *
  * See IpInfo's <a href="https://ipinfo.io/developers/full-ip-details">Full IP details</a>.
  *
  * @since 1.0.0
- * @author Vitaliy Berdinskikh
+ * @author Witalij Berdinskich
  */
 @JsonIgnoreProperties(ignoreUnknown = true)
 public class IpInfo extends IpGeo {
 
-	private String hostname;
-	private String org;
+	private final String hostname;
+	private final String org;
 
 	@JsonCreator
 	public IpInfo(@JsonProperty("bogon") boolean bogon, @JsonProperty("city") String city, @JsonProperty("country") String country,
@@ -70,20 +72,19 @@ public class IpInfo extends IpGeo {
 		return null == getIp() ? 0 : getIp().hashCode() + 4;
 	}
 
+	@Override
 	public String toString() {
-		StringBuilder builder = new StringBuilder(this.getClass().getSimpleName());
-
-		builder.append("{ ip: ").append(getIp());
-		builder.append(", bogon: ").append(isBogon());
-		builder.append(", hostname: ").append(getHostname());
-		builder.append(", country: ").append(getCountry());
-		builder.append(", region: ").append(getRegion());
-		builder.append(", city: ").append(getCity());
-		builder.append(", loc: ").append(getLoc());
-		builder.append(", postal: ").append(getPostal());
-		builder.append(", org: ").append(getOrg()).append(" }");
-
-		return builder.toString();
+		return new StringJoiner(", ", IpInfo.class.getSimpleName() + "[", "]")
+				.add("bogon=" + isBogon())
+				.add("city='" + getCity() + "'")
+				.add("country='" + getCountry() + "'")
+				.add("hostname='" + hostname + "'")
+				.add("ip='" + getIp() + "'")
+				.add("loc='" + getLoc() + "'")
+				.add("org='" + org + "'")
+				.add("postal='" + getPostal() + "'")
+				.add("region='" + getRegion() + "'")
+				.toString();
 	}
 
 }

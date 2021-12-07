@@ -1,7 +1,7 @@
 package ua.co.ur6lad.ipinfo;
 
 /*
- * Copyright 2017 Vitaliy Berdinskikh
+ * Copyright 2017,2021 Witalij Berdinskich
  *
  * Licensed under the Apache License, Version 2.0 (the "License");
  * you may not use this file except in compliance with the License.
@@ -20,24 +20,26 @@ import com.fasterxml.jackson.annotation.JsonCreator;
 import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
 import com.fasterxml.jackson.annotation.JsonProperty;
 
+import java.util.StringJoiner;
+
 /**
  * Short IP details bean.
  *
  * See IpInfo's <a href="https://ipinfo.io/developers/specific-fields">Specific fields</a>.
  *
  * @since 1.0.0
- * @author Vitaliy Berdinskikh
+ * @author Witalij Berdinskich
  */
 @JsonIgnoreProperties(ignoreUnknown = true)
 public class IpGeo {
 
-	private boolean bogon;
-	private String city;
-	private String country;
-	private String ip;
-	private String loc;
-	private String postal;
-	private String region;
+	private final boolean bogon;
+	private final String city;
+	private final String country;
+	private final String ip;
+	private final String loc;
+	private final String postal;
+	private final String region;
 
 	@JsonCreator
 	public IpGeo(@JsonProperty("bogon") boolean bogon, @JsonProperty("city") String city, @JsonProperty("country") String country,
@@ -99,18 +101,16 @@ public class IpGeo {
 		return null == getIp() ? 0 : getIp().hashCode() + 3;
 	}
 
+	@Override
 	public String toString() {
-		StringBuilder builder = new StringBuilder(this.getClass().getSimpleName());
-
-		builder.append("{ ip: ").append(getIp());
-		builder.append(", bogon: ").append(isBogon());
-		builder.append(", country: ").append(getCountry());
-		builder.append(", region: ").append(getRegion());
-		builder.append(", city: ").append(getCity());
-		builder.append(", loc: ").append(getLoc());
-		builder.append(", postal: ").append(getPostal()).append(" }");
-
-		return builder.toString();
+		return new StringJoiner(", ", getClass().getSimpleName() + "[", "]")
+				.add("bogon=" + bogon)
+				.add("city='" + city + "'")
+				.add("country='" + country + "'")
+				.add("ip='" + ip + "'")
+				.add("loc='" + loc + "'")
+				.add("postal='" + postal + "'")
+				.add("region='" + region + "'")
+				.toString();
 	}
-
 }

@@ -1,7 +1,7 @@
 package ua.co.ur6lad.ipinfo;
 
 /*
- * Copyright 2017 Vitaliy Berdinskikh
+ * Copyright 2017,2021 Witalij Berdinskich
  *
  * Licensed under the Apache License, Version 2.0 (the "License");
  * you may not use this file except in compliance with the License.
@@ -24,18 +24,18 @@ import feign.Logger.Level;
 import feign.hystrix.HystrixFeign;
 import feign.jackson.JacksonDecoder;
 import feign.slf4j.Slf4jLogger;
+import org.junit.jupiter.api.BeforeEach;
+import org.junit.jupiter.api.Test;
 
 import java.io.BufferedReader;
 import java.io.IOException;
 import java.util.stream.Collectors;
 
-import org.junit.Before;
-import org.junit.Test;
-
-import static org.junit.Assert.assertEquals;
-import static org.junit.Assert.assertFalse;
-import static org.junit.Assert.assertNotNull;
-import static org.junit.Assert.assertTrue;
+import static feign.Util.UTF_8;
+import static org.junit.jupiter.api.Assertions.assertEquals;
+import static org.junit.jupiter.api.Assertions.assertFalse;
+import static org.junit.jupiter.api.Assertions.assertNotNull;
+import static org.junit.jupiter.api.Assertions.assertTrue;
 
 public class IpInfoClientIT {
 
@@ -48,55 +48,55 @@ public class IpInfoClientIT {
 	public void getGeoOfBogon() {
 		IpGeo geo = client.lookupGeo(LOOPBACK_IP_ADDRESS);
 
-		assertEquals("Bogon IP address", LOOPBACK_IP_ADDRESS, geo.getIp());
-		assertTrue("Loopback", geo.isBogon());
+		assertEquals(LOOPBACK_IP_ADDRESS, geo.getIp(), "Bogon IP address");
+		assertTrue(geo.isBogon(), "Loopback");
 	}
 
 	@Test
 	public void getGeoOfGooglePublicDNS() {
 		IpGeo geo = client.lookupGeo(GOOGLE_DNS_IP_ADDRESS);
 
-		assertEquals("Google Public DNS IP address", GOOGLE_DNS_IP_ADDRESS, geo.getIp());
-		assertFalse("Reserved IP", geo.isBogon());
+		assertEquals(GOOGLE_DNS_IP_ADDRESS, geo.getIp(), "Google Public DNS IP address");
+		assertFalse(geo.isBogon(), "Reserved IP");
 	}
 
 	@Test
 	public void getInfoOfGooglePublicDNS() {
 		IpInfo info = client.lookup(GOOGLE_DNS_IP_ADDRESS);
 
-		assertEquals("Google Public DNS IP address", GOOGLE_DNS_IP_ADDRESS, info.getIp());
-		assertFalse("Reserved IP", info.isBogon());
+		assertEquals(GOOGLE_DNS_IP_ADDRESS, info.getIp(), "Google Public DNS IP address");
+		assertFalse(info.isBogon(), "Reserved IP");
 	}
 
 	@Test
 	public void getInfoOfOwnIp() {
 		IpInfo info = client.lookup();
 
-		assertNotNull("Own IP", info.getIp());
-		assertFalse("Reserved IP", info.isBogon());
+		assertNotNull(info.getIp(), "Own IP");
+		assertFalse(info.isBogon(), "Reserved IP");
 	}
 
 	@Test
 	public void getIp() throws IOException {
 		Response response = client.lookupField(LOOPBACK_IP_ADDRESS, IpInfoField.Ip);
 
-		assertNotNull("Own IP", response);
-		assertEquals("HTTP 200 OK", 200, response.status());
+		assertNotNull(response, "Own IP");
+		assertEquals(200, response.status(), "HTTP 200 OK");
 		BufferedReader bodyReader = new BufferedReader(response.body().asReader());
-		assertEquals("Loopback", LOOPBACK_IP_ADDRESS, bodyReader.lines().collect(Collectors.joining("\n")));
+		assertEquals(LOOPBACK_IP_ADDRESS, bodyReader.lines().collect(Collectors.joining("\n")), "Loopback");
 	}
 
 	@Test
 	public void getCountry() throws IOException {
 		Response response = client.lookupField(GOOGLE_DNS_IP_ADDRESS, IpInfoField.Country);
 
-		assertNotNull("Own IP", response);
-		assertEquals("HTTP 200 OK", 200, response.status());
-		BufferedReader bodyReader = new BufferedReader(response.body().asReader());
-		assertEquals("US", "US", bodyReader.lines().collect(Collectors.joining("\n")));
+		assertNotNull(response, "Own IP");
+		assertEquals(200, response.status(), "HTTP 200 OK");
+		BufferedReader bodyReader = new BufferedReader(response.body().asReader(UTF_8));
+		assertEquals("US", bodyReader.lines().collect(Collectors.joining("\n")), "US");
 	}
 
-	@Before
+	@BeforeEach
 	public void setUp() {
 		ObjectMapper mapper = new ObjectMapper()
 				.enable(DeserializationFeature.ACCEPT_EMPTY_STRING_AS_NULL_OBJECT);
