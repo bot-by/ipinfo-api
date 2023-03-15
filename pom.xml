@@ -222,7 +222,7 @@
     </profile>
   </profiles>
   <properties>
-    <compiler-plugin.version>3.8.1</compiler-plugin.version>
+    <compiler-plugin.version>3.11.0</compiler-plugin.version>
     <failsafe-plugin.version>2.22.2</failsafe-plugin.version>
     <feign.version>11.7</feign.version>
     <jackson.version>2.13.0</jackson.version>
