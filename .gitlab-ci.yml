@@ -1,0 +1,76 @@
+variables:
+  MAVEN_CLI_OPTS: "--errors --fail-at-end --show-version -DinstallAtEnd=true -DdeployAtEnd=true -Dmaven.repo.local=$CI_PROJECT_DIR/.m2/repository -Dmaven.compiler.showWarnings=false -Dmaven.compiler.debug=false -Dorg.slf4j.simpleLogger.showDateTime=true -Dorg.slf4j.simpleLogger.dateTimeFormat=HH:mm:ss:SSS"
+
+image: maven:3-openjdk-11
+
+include:
+  - template: Security/SAST.gitlab-ci.yml
+
+cache:
+  paths:
+    - .m2/repository
+    - target
+
+stages:
+  - build
+  - test
+  - verify
+  - deploy
+
+build:
+  stage: build
+  script:
+    - mvn $MAVEN_CLI_OPTS compile
+  except:
+    - tags
+
+test:
+  stage: test
+  script:
+    - mvn $MAVEN_CLI_OPTS verify
+  artifacts:
+    reports:
+      junit:
+        - target/surefire-reports/TEST-*.xml
+        - target/failsafe-reports/TEST-*.xml
+
+coverage:
+  stage: verify
+  script:
+    - awk -F"," '{ instructions += $4 + $5; covered += $5 } END { print covered, "/", instructions, "instructions covered"; print 100*covered/instructions, "% covered" }' target/site/jacoco/jacoco.csv
+  coverage: '/(\d+\.?\d*) \% covered/'
+  rules:
+    - if: $CI_DEFAULT_BRANCH == $CI_COMMIT_BRANCH
+
+codacy:
+  stage: verify
+  script:
+    - bash <(curl -Ls https://coverage.codacy.com/get.sh) report -r target/site/jacoco/jacoco.xml
+  rules:
+    - if: $CODACY_PROJECT_TOKEN
+
+sast:
+  stage: test
+  variables:
+    SAST_EXCLUDED_PATHS: jacoco-resources,prism.js
+
+release:
+  stage: deploy
+  script:
+    - mvn $MAVEN_CLI_OPTS -s ci_settings.xml clean deploy -Dchangelist= -ntp -Psources,javadocs,sign-and-deploy
+  only:
+    - tags
+
+pages:
+  stage: deploy
+  script:
+    - cp changelog.md src/site/markdown
+    - cp example-lambda/cloudwatch-screenshot.png src/site/resources
+    - mvn $MAVEN_CLI_OPTS clean verify site -Dchangelist= -Pjavadocs
+    - mv target/site public
+    - mv target/apidocs public
+  artifacts:
+    paths:
+      - public
+  only:
+    - tags
