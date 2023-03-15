@@ -1,7 +1,7 @@
 package uk.bot_by.ipinfo;
 
 /*
- * Copyright 2017,2021 Witalij Berdinskich
+ * Copyright 2017-2023 Witalij Berdinskich
  *
  * Licensed under the Apache License, Version 2.0 (the "License");
  * you may not use this file except in compliance with the License.
