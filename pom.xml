@@ -224,7 +224,7 @@
   <properties>
     <compiler-plugin.version>3.8.1</compiler-plugin.version>
     <failsafe-plugin.version>2.22.2</failsafe-plugin.version>
-    <feign.version>11.7</feign.version>
+    <feign.version>12.2</feign.version>
     <jackson.version>2.13.0</jackson.version>
     <jacoco-plugin.version>0.8.7</jacoco-plugin.version>
     <jar-plugin.version>3.2.0</jar-plugin.version>
