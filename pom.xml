@@ -227,7 +227,7 @@
     <feign.version>11.7</feign.version>
     <jackson.version>2.13.0</jackson.version>
     <jacoco-plugin.version>0.8.7</jacoco-plugin.version>
-    <jar-plugin.version>3.2.0</jar-plugin.version>
+    <jar-plugin.version>3.3.0</jar-plugin.version>
     <javadoc-plugin.version>3.3.1</javadoc-plugin.version>
     <junit-jupiter.version>5.8.2</junit-jupiter.version>
     <maven.compiler.release>11</maven.compiler.release>
