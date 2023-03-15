@@ -225,7 +225,7 @@
     <compiler-plugin.version>3.11.0</compiler-plugin.version>
     <failsafe-plugin.version>2.22.2</failsafe-plugin.version>
     <feign.version>11.7</feign.version>
-    <jackson.version>2.13.0</jackson.version>
+    <jackson.version>2.14.2</jackson.version>
     <jacoco-plugin.version>0.8.7</jacoco-plugin.version>
     <jar-plugin.version>3.3.0</jar-plugin.version>
     <javadoc-plugin.version>3.3.1</javadoc-plugin.version>
