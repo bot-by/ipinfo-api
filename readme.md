@@ -1,19 +1,19 @@
 # ipinfo-api
 
-Unofficial Java wrapper for [ipinfo.io][] IP geolocation API. 
+Unofficial Java wrapper for [ipinfo.io][ipinfo] IP geolocation API.
 
 ## Usage
 
 It can look up:
 
-* own IP info,
-* any IP info,
-* short (geo) IP info.
+- own IP info,
+- any IP info,
+- short (geo) IP info.
 
-Just build a client with [Feign][] and [Hystrix][] or [OkHttp][].
+Just build a client with [Feign][feign].
 
 ```java
-IpInfoClient client = HystrixFeign.builder()
+IpInfoClient client = Feign.builder()
 		.decoder(new JacksonDecoder())
 		.target(IpInfoClient.class, "http://ipinfo.io/");
 IpInfo info = client.lookup();
@@ -27,21 +27,37 @@ If you need only one field.
 log.info("now I am at {}", client.lookupField(IpInfoField.Country));
 ```
 
-[![Maven Central](https://img.shields.io/maven-central/v/ua.co.ur6lad/ipinfo-api.svg)](http://search.maven.org/#search%7Cga%7C1%7Cg%3A%22ua.co.ur6lad%22%20AND%20a%3A%22ipinfo-api%22)
-
-[![Download](https://api.bintray.com/packages/ur6lad/maven/ipinfo-api/images/download.svg?version=1.0.0) ](https://bintray.com/ur6lad/maven/ipinfo-api/1.0.0/link)
-
 ## To Do
 
 * Add token for paid plans of [ipinfo.io][].
 
+## Contributing
+
+Please read [Contributing](contributing.md).
+
+## History
+
+See [Changelog](changelog.md)
+
 ## License
 
-`ipinfo-api` is licensed under the **Apache License v2.0**
+Copyright 2017-2023 Witalij Berdinskich
 
+Licensed under the Apache License, Version 2.0 (the "License");
+you may not use this file except in compliance with the License.
+You may obtain a copy of the License at
+
+http://www.apache.org/licenses/LICENSE-2.0
+
+Unless required by applicable law or agreed to in writing, software
+distributed under the License is distributed on an "AS IS" BASIS,
+WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
+See the License for the specific language governing permissions and
+limitations under the License.
+
+[Apache License v2.0](LICENSE)
 [![License](https://img.shields.io/badge/license-Apache%202.0-blue.svg?style=flat)](http://www.apache.org/licenses/LICENSE-2.0.html)
 
-[ipinfo.io]: http://ipinfo.io "Comprehensive IP details website and API"
-[Feign]: https://github.com/OpenFeign/feign "Feign makes writing java http clients easier"
-[Hystrix]: https://github.com/Netflix/Hystrix "Fault tolerance library"
-[OkHttp]: https://github.com/square/okhttp "HTTP+HTTP/2 client for Java" 
+[ipinfo]: http://ipinfo.io "Comprehensive IP details website and API"
+
+[feign]: https://github.com/OpenFeign/feign "Feign makes writing java http clients easier"
