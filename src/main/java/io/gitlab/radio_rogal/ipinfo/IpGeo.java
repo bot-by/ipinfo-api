@@ -1,4 +1,4 @@
-package uk.bot_by.ipinfo;
+package io.gitlab.radio_rogal.ipinfo;
 
 /*
  * Copyright 2017-2023 Witalij Berdinskich

@@ -13,7 +13,7 @@
  * See the License for the specific language governing permissions and
  * limitations under the License.
  */
-package uk.bot_by.ipinfo;
+package io.gitlab.radio_rogal.ipinfo;
 
 import feign.Headers;
 import feign.Param;

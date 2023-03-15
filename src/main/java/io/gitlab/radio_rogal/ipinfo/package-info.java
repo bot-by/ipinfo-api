@@ -4,4 +4,4 @@
  * @since 1.0.0
  * @author Witalij Berdinskich
  */
-package uk.bot_by.ipinfo;
+package io.gitlab.radio_rogal.ipinfo;

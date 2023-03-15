@@ -1,4 +1,4 @@
-package uk.bot_by.ipinfo;
+package io.gitlab.radio_rogal.ipinfo;
 
 import com.fasterxml.jackson.databind.DeserializationFeature;
 import com.fasterxml.jackson.databind.ObjectMapper;

@@ -93,8 +93,8 @@
         <configuration>
           <archive>
             <manifestEntries>
-              <Add-Exports>uk.bot_by.ipinfo</Add-Exports>
-              <Automatic-Module-Name>uk.bot_by.ipinfo</Automatic-Module-Name>
+              <Add-Exports>io.gitlab.radio_rogal.ipinfo</Add-Exports>
+              <Automatic-Module-Name>io.gitlab.radio_rogal.ipinfo</Automatic-Module-Name>
             </manifestEntries>
           </archive>
         </configuration>
@@ -301,7 +301,7 @@
       <timezone>Europe/Kyiv</timezone>
     </developer>
   </developers>
-  <groupId>uk.bot-by.ipinfo</groupId>
+  <groupId>io.gitlab.radio-rogal</groupId>
   <inceptionYear>2017</inceptionYear>
   <licenses>
     <license>
@@ -319,45 +319,11 @@
       <build>
         <plugins>
           <plugin>
-            <artifactId>maven-failsafe-plugin</artifactId>
-            <executions>
-              <execution>
-                <goals>
-                  <goal>integration-test</goal>
-                  <goal>verify</goal>
-                </goals>
-              </execution>
-            </executions>
-            <groupId>org.apache.maven.plugins</groupId>
-            <version>${failsafe-plugin.version}</version>
-          </plugin>
-        </plugins>
-      </build>
-      <id>it-tests</id>
-    </profile>
-    <profile>
-      <build>
-        <plugins>
-          <plugin>
-            <artifactId>maven-javadoc-plugin</artifactId>
-            <executions>
-              <execution>
-                <goals>
-                  <goal>javadoc</goal>
-                  <goal>jar</goal>
-                </goals>
-                <id>attach-javadocs</id>
-              </execution>
-            </executions>
-            <groupId>org.apache.maven.plugins</groupId>
-            <version>${javadoc-plugin.version}</version>
-          </plugin>
-          <plugin>
             <artifactId>maven-source-plugin</artifactId>
             <executions>
               <execution>
                 <goals>
-                  <goal>jar-no-fork</goal>
+                  <goal>jar</goal>
                 </goals>
                 <id>attach-sources</id>
               </execution>
@@ -367,36 +333,85 @@
           </plugin>
         </plugins>
       </build>
-      <id>release</id>
+      <id>sources</id>
     </profile>
     <profile>
       <build>
         <plugins>
           <plugin>
-            <artifactId>jacoco-maven-plugin</artifactId>
+            <artifactId>maven-javadoc-plugin</artifactId>
+            <configuration>
+              <additionalJOptions>
+                <additionalJOption>
+                  -J-Dhttp.agent=maven-javadoc-plugin_${project.groupId}:${project.artifactId}
+                </additionalJOption>
+              </additionalJOptions>
+              <additionalOptions>
+                <additionalOption>--allow-script-in-comments</additionalOption>
+              </additionalOptions>
+              <bottom><![CDATA[
+<script type="text/javascript" src="{@docRoot}/resources/prism.js"></script>
+							]]></bottom>
+              <docfilessubdirs>true</docfilessubdirs>
+              <isOffline>false</isOffline>
+              <javadocExecutable>${java.home}/bin/javadoc</javadocExecutable>
+              <links>
+                <link>https://javadoc.io/doc/org.slf4j/slf4j-api/${slf4j.version}/</link>
+              </links>
+              <show>public</show>
+              <top><![CDATA[
+<link rel="stylesheet" type="text/css" href="{@docRoot}/resources/prism.css"/>
+<link rel="stylesheet" type="text/css" href="{@docRoot}/resources/ipinfo.css"/>
+							]]></top>
+            </configuration>
             <executions>
               <execution>
                 <goals>
-                  <goal>prepare-agent</goal>
+                  <goal>jar</goal>
                 </goals>
-              </execution>
-              <execution>
-                <goals>
-                  <goal>report</goal>
-                </goals>
-                <id>report</id>
-                <phase>test</phase>
+                <id>attach-javadocs</id>
               </execution>
             </executions>
-            <groupId>org.jacoco</groupId>
-            <version>${jacoco-plugin.version}</version>
+            <groupId>org.apache.maven.plugins</groupId>
+            <version>${javadoc-plugin.version}</version>
           </plugin>
         </plugins>
       </build>
-      <id>jacoco</id>
+      <id>javadocs</id>
+    </profile>
+    <profile>
+      <build>
+        <plugins>
+          <plugin>
+            <artifactId>sign-maven-plugin</artifactId>
+            <executions>
+              <execution>
+                <goals>
+                  <goal>sign</goal>
+                </goals>
+              </execution>
+            </executions>
+            <groupId>org.simplify4u.plugins</groupId>
+            <version>${sign-plugin.version}</version>
+          </plugin>
+          <plugin>
+            <artifactId>nexus-staging-maven-plugin</artifactId>
+            <configuration>
+              <autoReleaseAfterClose>false</autoReleaseAfterClose>
+              <nexusUrl>https://s01.oss.sonatype.org/</nexusUrl>
+              <serverId>ossrh</serverId>
+            </configuration>
+            <extensions>true</extensions>
+            <groupId>org.sonatype.plugins</groupId>
+            <version>${nexus-staging-plugin.version}</version>
+          </plugin>
+        </plugins>
+      </build>
+      <id>sign-and-deploy</id>
     </profile>
   </profiles>
   <properties>
+    <changelist>-SNAPSHOT</changelist>
     <clean-plugin.version>3.2.0</clean-plugin.version>
     <compiler-plugin.version>3.11.0</compiler-plugin.version>
     <enforcer-plugin.version>3.2.1</enforcer-plugin.version>
@@ -411,12 +426,16 @@
     <maven.compiler.release>11</maven.compiler.release>
     <minimal-version.java>11</minimal-version.java>
     <minimal-version.maven>3.8.4</minimal-version.maven>
+    <nexus-staging-plugin.version>1.6.13</nexus-staging-plugin.version>
     <project.build.sourceEncoding>UTF-8</project.build.sourceEncoding>
     <project.reporting.outputEncoding>UTF-8</project.reporting.outputEncoding>
     <propertiesEncoding>ISO-8859-1</propertiesEncoding>
-    <slf4j.version>2.0.6</slf4j.version>
+    <revision>1.0.0</revision>
+    <sha1/>
+    <sign-plugin.version>1.0.1</sign-plugin.version>
+    <slf4j.version>2.0.5</slf4j.version>
     <source-plugin.version>3.2.1</source-plugin.version>
   </properties>
   <url>https://github.com/radio-rogal/ipinfo-api</url>
-  <version>1.0.0</version>
+  <version>${revision}${changelist}${sha1}</version>
 </project>
