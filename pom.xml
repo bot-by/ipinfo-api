@@ -234,7 +234,7 @@
     <project.build.sourceEncoding>UTF-8</project.build.sourceEncoding>
     <project.reporting.outputEncoding>UTF-8</project.reporting.outputEncoding>
     <propertiesEncoding>UTF-8</propertiesEncoding>
-    <slf4j.version>1.7.32</slf4j.version>
+    <slf4j.version>2.0.6</slf4j.version>
     <source-plugin.version>3.2.1</source-plugin.version>
   </properties>
   <url>https://github.com/radio-rogal/ipinfo-api</url>
