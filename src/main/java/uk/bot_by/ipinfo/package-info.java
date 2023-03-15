@@ -4,4 +4,4 @@
  * @since 1.0.0
  * @author Witalij Berdinskich
  */
-package ua.co.ur6lad.ipinfo;
+package uk.bot_by.ipinfo;

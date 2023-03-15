@@ -1,4 +1,4 @@
-package ua.co.ur6lad.ipinfo;
+package uk.bot_by.ipinfo;
 
 /*
  * Copyright 2017,2021 Witalij Berdinskich
