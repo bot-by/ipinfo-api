@@ -433,7 +433,7 @@
     <revision>1.0.0</revision>
     <sha1/>
     <sign-plugin.version>1.0.1</sign-plugin.version>
-    <slf4j.version>2.0.5</slf4j.version>
+    <slf4j.version>2.0.7</slf4j.version>
     <source-plugin.version>3.2.1</source-plugin.version>
   </properties>
   <url>https://github.com/radio-rogal/ipinfo-api</url>
