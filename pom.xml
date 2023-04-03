@@ -419,7 +419,7 @@
     <feign.version>12.2</feign.version>
     <flatten-plugin.version>1.4.0</flatten-plugin.version>
     <jackson.version>2.14.2</jackson.version>
-    <jacoco-plugin.version>0.8.8</jacoco-plugin.version>
+    <jacoco-plugin.version>0.8.9</jacoco-plugin.version>
     <jar-plugin.version>3.3.0</jar-plugin.version>
     <javadoc-plugin.version>3.5.0</javadoc-plugin.version>
     <junit-jupiter.version>5.9.2</junit-jupiter.version>
