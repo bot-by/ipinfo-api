@@ -416,7 +416,7 @@
     <compiler-plugin.version>3.11.0</compiler-plugin.version>
     <enforcer-plugin.version>3.2.1</enforcer-plugin.version>
     <failsafe-plugin.version>3.0.0</failsafe-plugin.version>
-    <feign.version>12.2</feign.version>
+    <feign.version>12.3</feign.version>
     <flatten-plugin.version>1.4.1</flatten-plugin.version>
     <jackson.version>2.14.2</jackson.version>
     <jacoco-plugin.version>0.8.9</jacoco-plugin.version>
