@@ -26,10 +26,10 @@
         <configuration>
           <rules>
             <requireJavaVersion>
-              <version>[${minimal-version.java},)</version>
+              <version>[11,)</version>
             </requireJavaVersion>
             <requireMavenVersion>
-              <version>[${minimal-version.maven},)</version>
+              <version>[3.8.1,)</version>
             </requireMavenVersion>
           </rules>
         </configuration>
@@ -49,12 +49,12 @@
           </execution>
         </executions>
         <groupId>org.apache.maven.plugins</groupId>
-        <version>${enforcer-plugin.version}</version>
+        <version>3.2.1</version>
       </plugin>
       <plugin>
         <artifactId>maven-clean-plugin</artifactId>
         <groupId>org.apache.maven.plugins</groupId>
-        <version>${clean-plugin.version}</version>
+        <version>3.2.0</version>
       </plugin>
       <plugin>
         <artifactId>flatten-maven-plugin</artifactId>
@@ -78,28 +78,58 @@
           </execution>
         </executions>
         <groupId>org.codehaus.mojo</groupId>
-        <version>${flatten-plugin.version}</version>
+        <version>1.4.1</version>
+      </plugin>
+      <plugin>
+        <artifactId>templating-maven-plugin</artifactId>
+        <executions>
+          <execution>
+            <goals>
+              <goal>filter-sources</goal>
+            </goals>
+            <id>filter-sources</id>
+          </execution>
+        </executions>
+        <groupId>org.codehaus.mojo</groupId>
+        <version>1.0.0</version>
+      </plugin>
+      <plugin>
+        <artifactId>maven-resources-plugin</artifactId>
+        <configuration>
+          <propertiesEncoding>ISO-8859-1</propertiesEncoding>
+        </configuration>
+        <groupId>org.apache.maven.plugins</groupId>
+        <version>3.3.1</version>
       </plugin>
       <plugin>
         <artifactId>maven-compiler-plugin</artifactId>
         <configuration>
-          <release>${maven.compiler.release}</release>
+          <release>11</release>
         </configuration>
         <groupId>org.apache.maven.plugins</groupId>
-        <version>${compiler-plugin.version}</version>
+        <version>3.11.0</version>
+      </plugin>
+      <plugin>
+        <artifactId>maven-surefire-plugin</artifactId>
+        <configuration>
+          <properties>
+            <groups>fast</groups>
+          </properties>
+        </configuration>
+        <groupId>org.apache.maven.plugins</groupId>
+        <version>3.0.0</version>
       </plugin>
       <plugin>
         <artifactId>maven-jar-plugin</artifactId>
         <configuration>
           <archive>
             <manifestEntries>
-              <Add-Exports>io.gitlab.radio_rogal.ipinfo</Add-Exports>
               <Automatic-Module-Name>io.gitlab.radio_rogal.ipinfo</Automatic-Module-Name>
             </manifestEntries>
           </archive>
         </configuration>
         <groupId>org.apache.maven.plugins</groupId>
-        <version>${jar-plugin.version}</version>
+        <version>3.3.0</version>
       </plugin>
       <plugin>
         <artifactId>maven-failsafe-plugin</artifactId>
@@ -122,7 +152,7 @@
           </execution>
         </executions>
         <groupId>org.apache.maven.plugins</groupId>
-        <version>${failsafe-plugin.version}</version>
+        <version>3.0.0</version>
       </plugin>
       <plugin>
         <artifactId>jacoco-maven-plugin</artifactId>
@@ -137,28 +167,10 @@
             <id>prepare-agent</id>
           </execution>
           <execution>
-            <configuration>
-              <dataFile>${project.build.directory}/jacoco-ut.exec</dataFile>
-              <outputDirectory>${project.reporting.outputDirectory}/jacoco-ut</outputDirectory>
-            </configuration>
-            <goals>
-              <goal>report</goal>
-            </goals>
-            <id>report</id>
-            <phase>test</phase>
-          </execution>
-          <execution>
             <goals>
               <goal>prepare-agent-integration</goal>
             </goals>
             <id>prepare-agent-integration</id>
-          </execution>
-          <execution>
-            <goals>
-              <goal>report-integration</goal>
-            </goals>
-            <id>report-integration</id>
-            <phase>integration-test</phase>
           </execution>
           <execution>
             <configuration>
@@ -198,7 +210,7 @@
                   <limits>
                     <limit>
                       <counter>COMPLEXITY</counter>
-                      <minimum>0.72</minimum>
+                      <minimum>0.77</minimum>
                       <value>COVEREDRATIO</value>
                     </limit>
                   </limits>
@@ -213,7 +225,7 @@
           </execution>
         </executions>
         <groupId>org.jacoco</groupId>
-        <version>${jacoco-plugin.version}</version>
+        <version>0.8.9</version>
       </plugin>
     </plugins>
     <resources>
@@ -233,9 +245,35 @@
   </build>
   <dependencies>
     <dependency>
+      <artifactId>annotations</artifactId>
+      <groupId>org.jetbrains</groupId>
+      <scope>provided</scope>
+      <version>24.0.1</version>
+    </dependency>
+    <dependency>
+      <artifactId>slf4j-api</artifactId>
+      <groupId>org.slf4j</groupId>
+      <version>${slf4j.version}</version>
+    </dependency>
+    <dependency>
       <artifactId>feign-core</artifactId>
       <groupId>io.github.openfeign</groupId>
       <version>${feign.version}</version>
+    </dependency>
+    <dependency>
+      <artifactId>feign-java11</artifactId>
+      <groupId>io.github.openfeign</groupId>
+      <version>${feign.version}</version>
+    </dependency>
+    <dependency>
+      <artifactId>feign-json</artifactId>
+      <groupId>io.github.openfeign</groupId>
+      <version>${feign.version}</version>
+    </dependency>
+    <dependency>
+      <artifactId>json</artifactId>
+      <groupId>org.json</groupId>
+      <version>20230227</version>
     </dependency>
     <!-- test -->
     <dependency>
@@ -251,10 +289,16 @@
       <version>${junit-jupiter.version}</version>
     </dependency>
     <dependency>
-      <artifactId>slf4j-api</artifactId>
-      <groupId>org.slf4j</groupId>
+      <artifactId>junit-jupiter-params</artifactId>
+      <groupId>org.junit.jupiter</groupId>
       <scope>test</scope>
-      <version>${slf4j.version}</version>
+      <version>${junit-jupiter.version}</version>
+    </dependency>
+    <dependency>
+      <artifactId>hamcrest</artifactId>
+      <groupId>org.hamcrest</groupId>
+      <scope>test</scope>
+      <version>2.2</version>
     </dependency>
     <dependency>
       <artifactId>slf4j-simple</artifactId>
@@ -263,40 +307,23 @@
       <version>${slf4j.version}</version>
     </dependency>
     <dependency>
-      <artifactId>feign-hystrix</artifactId>
-      <groupId>io.github.openfeign</groupId>
-      <scope>test</scope>
-      <version>${feign.version}</version>
-    </dependency>
-    <dependency>
       <artifactId>feign-slf4j</artifactId>
       <groupId>io.github.openfeign</groupId>
       <scope>test</scope>
       <version>${feign.version}</version>
     </dependency>
     <dependency>
-      <artifactId>feign-jackson</artifactId>
-      <groupId>io.github.openfeign</groupId>
+      <artifactId>jsonassert</artifactId>
+      <groupId>org.skyscreamer</groupId>
       <scope>test</scope>
-      <version>${feign.version}</version>
-    </dependency>
-    <dependency>
-      <artifactId>jackson-annotations</artifactId>
-      <groupId>com.fasterxml.jackson.core</groupId>
-      <version>${jackson.version}</version>
-    </dependency>
-    <dependency>
-      <artifactId>jackson-databind</artifactId>
-      <groupId>com.fasterxml.jackson.core</groupId>
-      <scope>test</scope>
-      <version>${jackson.version}</version>
+      <version>1.5.1</version>
     </dependency>
   </dependencies>
   <description>Unofficial Java wrapper for ipinfo.io IP geolocation API.</description>
   <developers>
     <developer>
       <email>radio_rogal@keemail.me</email>
-      <id>radio-rogal</id>
+      <id>radio_rogal</id>
       <name>Vitaliy Berdinskikh</name>
       <timezone>Europe/Kyiv</timezone>
     </developer>
@@ -329,7 +356,7 @@
               </execution>
             </executions>
             <groupId>org.apache.maven.plugins</groupId>
-            <version>${source-plugin.version}</version>
+            <version>3.2.1</version>
           </plugin>
         </plugins>
       </build>
@@ -373,7 +400,7 @@
               </execution>
             </executions>
             <groupId>org.apache.maven.plugins</groupId>
-            <version>${javadoc-plugin.version}</version>
+            <version>3.5.0</version>
           </plugin>
         </plugins>
       </build>
@@ -392,7 +419,7 @@
               </execution>
             </executions>
             <groupId>org.simplify4u.plugins</groupId>
-            <version>${sign-plugin.version}</version>
+            <version>1.0.1</version>
           </plugin>
           <plugin>
             <artifactId>nexus-staging-maven-plugin</artifactId>
@@ -403,7 +430,7 @@
             </configuration>
             <extensions>true</extensions>
             <groupId>org.sonatype.plugins</groupId>
-            <version>${nexus-staging-plugin.version}</version>
+            <version>1.6.13</version>
           </plugin>
         </plugins>
       </build>
@@ -412,30 +439,15 @@
   </profiles>
   <properties>
     <changelist>-SNAPSHOT</changelist>
-    <clean-plugin.version>3.2.0</clean-plugin.version>
-    <compiler-plugin.version>3.11.0</compiler-plugin.version>
-    <enforcer-plugin.version>3.2.1</enforcer-plugin.version>
-    <failsafe-plugin.version>3.0.0</failsafe-plugin.version>
-    <feign.version>12.2</feign.version>
-    <flatten-plugin.version>1.4.1</flatten-plugin.version>
+    <feign.version>12.3</feign.version>
     <jackson.version>2.14.2</jackson.version>
-    <jacoco-plugin.version>0.8.9</jacoco-plugin.version>
-    <jar-plugin.version>3.3.0</jar-plugin.version>
-    <javadoc-plugin.version>3.5.0</javadoc-plugin.version>
     <junit-jupiter.version>5.9.2</junit-jupiter.version>
-    <maven.compiler.release>11</maven.compiler.release>
-    <minimal-version.java>11</minimal-version.java>
-    <minimal-version.maven>3.8.4</minimal-version.maven>
-    <nexus-staging-plugin.version>1.6.13</nexus-staging-plugin.version>
     <project.build.sourceEncoding>UTF-8</project.build.sourceEncoding>
     <project.reporting.outputEncoding>UTF-8</project.reporting.outputEncoding>
-    <propertiesEncoding>ISO-8859-1</propertiesEncoding>
     <revision>1.0.0</revision>
     <sha1/>
-    <sign-plugin.version>1.0.1</sign-plugin.version>
     <slf4j.version>2.0.7</slf4j.version>
-    <source-plugin.version>3.2.1</source-plugin.version>
   </properties>
-  <url>https://github.com/radio-rogal/ipinfo-api</url>
+  <url>https://gitlab.com/radio_rogal/ipinfo-api</url>
   <version>${revision}${changelist}${sha1}</version>
 </project>

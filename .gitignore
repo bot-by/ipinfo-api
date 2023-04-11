@@ -1,6 +1,5 @@
 /target/
 /.flattened-pom.xml
-/.mvn/wrapper/maven-wrapper.jar
 
 *.iml
 *~
