@@ -20,7 +20,7 @@ stages:
 build:
   stage: build
   script:
-    - mvn $MAVEN_CLI_OPTS compile
+    - mvn $MAVEN_CLI_OPTS clean compile
   except:
     - tags
 
@@ -40,14 +40,14 @@ coverage:
     - awk -F"," '{ instructions += $4 + $5; covered += $5 } END { print covered, "/", instructions, "instructions covered"; print 100*covered/instructions, "% covered" }' target/site/jacoco/jacoco.csv
   coverage: '/(\d+\.?\d*) \% covered/'
   rules:
-    - if: $CI_DEFAULT_BRANCH == $CI_COMMIT_BRANCH
+    - if: $CI_DEFAULT_BRANCH == $CI_COMMIT_BRANCH && $CI_COMMIT_TAG == null
 
 codacy:
   stage: verify
   script:
     - bash <(curl -Ls https://coverage.codacy.com/get.sh) report -r target/site/jacoco/jacoco.xml
   rules:
-    - if: $CODACY_PROJECT_TOKEN
+    - if: $CODACY_PROJECT_TOKEN && $CI_COMMIT_TAG == null
 
 sast:
   stage: test

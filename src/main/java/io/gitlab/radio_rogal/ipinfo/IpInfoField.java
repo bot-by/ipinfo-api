@@ -1,5 +1,3 @@
-package io.gitlab.radio_rogal.ipinfo;
-
 /*
  * Copyright 2017-2023 Witalij Berdinskich
  *
@@ -7,7 +5,7 @@ package io.gitlab.radio_rogal.ipinfo;
  * you may not use this file except in compliance with the License.
  * You may obtain a copy of the License at
  *
- *	  http://www.apache.org/licenses/LICENSE-2.0
+ *     http://www.apache.org/licenses/LICENSE-2.0
  *
  * Unless required by applicable law or agreed to in writing, software
  * distributed under the License is distributed on an "AS IS" BASIS,
@@ -15,13 +13,26 @@ package io.gitlab.radio_rogal.ipinfo;
  * See the License for the specific language governing permissions and
  * limitations under the License.
  */
+package io.gitlab.radio_rogal.ipinfo;
+
+import static java.util.Objects.isNull;
 
 public enum IpInfoField {
 
-	City, Country, Hostname, Ip, Loc, Org, Postal, Region;
+  Abuse, Address("ip"), ASN, AnyCast(
+      "anycast"), Bogon, Carrier, City, Company, Country, Domains, Hostname, IP, Loc, Org, Postal, Privacy, Region, Timezone;
 
-	public String toString() {
-		return name().toLowerCase();
-	}
+  private String fieldName;
+
+  IpInfoField() {
+  }
+
+  IpInfoField(String fieldName) {
+    this.fieldName = fieldName;
+  }
+
+  public String toString() {
+    return (isNull(fieldName)) ? name().toLowerCase() : fieldName;
+  }
 
 }
