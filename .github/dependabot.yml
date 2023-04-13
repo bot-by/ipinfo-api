@@ -5,7 +5,17 @@
 
 version: 2
 updates:
-  - package-ecosystem: "maven" # See documentation for possible values
-    directory: "/" # Location of package manifests
+  # Maintain dependencies for Maven
+  - package-ecosystem: "maven"
+    directory: "/"
     schedule:
       interval: "weekly"
+      day: "sunday"
+    rebase-strategy: "disabled"
+  # Maintain dependencies for GitHub Actions
+  - package-ecosystem: "github-actions"
+    directory: "/"
+    schedule:
+      interval: "monthly"
+      day: "sunday"
+    rebase-strategy: "disabled"
