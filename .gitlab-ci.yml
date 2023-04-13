@@ -34,6 +34,11 @@ test:
         - target/surefire-reports/TEST-*.xml
         - target/failsafe-reports/TEST-*.xml
 
+sast:
+  stage: test
+  variables:
+    SAST_EXCLUDED_PATHS: jacoco-resources,prism.js
+
 coverage:
   stage: verify
   script:
@@ -49,28 +54,9 @@ codacy:
   rules:
     - if: $CODACY_PROJECT_TOKEN && $CI_COMMIT_TAG == null
 
-sast:
-  stage: test
-  variables:
-    SAST_EXCLUDED_PATHS: jacoco-resources,prism.js
-
 release:
   stage: deploy
   script:
     - mvn $MAVEN_CLI_OPTS -s ci_settings.xml clean deploy -Dchangelist= -ntp -Psources,javadocs,sign-and-deploy
-  only:
-    - tags
-
-pages:
-  stage: deploy
-  script:
-    - cp changelog.md src/site/markdown
-    - cp example-lambda/cloudwatch-screenshot.png src/site/resources
-    - mvn $MAVEN_CLI_OPTS clean verify site -Dchangelist= -Pjavadocs
-    - mv target/site public
-    - mv target/apidocs public
-  artifacts:
-    paths:
-      - public
   only:
     - tags
