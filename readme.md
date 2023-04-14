@@ -44,7 +44,7 @@ IpInfo client = Feign.builder()
 
 The token is optional on free plan, see more on  [IPinfo's pricing][pricing] page.
 
-Now you get details of your IP address;
+Now you get details of your IP address
 
 ```java
 client.lookup(null);

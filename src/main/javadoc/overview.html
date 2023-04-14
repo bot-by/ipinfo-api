@@ -8,24 +8,41 @@
 </head>
 <body>
 <p>Unofficial Java wrapper for <a href="https://ipinfo.io">ipinfo.io</a> IP geolocation API. </p>
-<h2>Usage</h2>
-<p>It can look up:</p>
+<p>This can look up:</p>
 <ul>
-  <li>own IP info,</li>
-  <li>any IP info,</li>
-  <li>short (geo) IP info.</li>
+  <li>information about your own IP address or someone else,</li>
+  <li>short (one-field) information about IP address.</li>
 </ul>
-<p>Just build a client with <a href="https://github.com/OpenFeign/feign">Feign</a> and <a
-    href="https://github.com/Netflix/Hystrix">Hystrix</a> or <a
-    href="https://github.com/square/okhttp">OkHttp</a>.</p>
+<h2>Usage</h2>
+<p>You get a ready client</p>
 <pre><code class="language-java">
-	IpInfoClient client = HystrixFeign.builder()
-			.decoder(new JacksonDecoder())
-			.target(IpInfoClient.class, IpInfoClient.REGULAR_URL);
-	IpInfo info = client.lookup();
-
-	log.info("my IP {}", info.getIp());
+  IpInfo client = IpInfo.getInstance("qwerty-token");
 </code></pre>
+<p>or make your own with <a href="https://github.com/OpenFeign/feign">Feign</a> and <a
+    href="https://github.com/stleary/JSON-java">Java JSON</a>.</p>
+<pre><code class="language-java">
+  IpInfo client = Feign.builder()
+                       .client(new Http2Client())
+                       .requestInterceptor(new TokenInterceptor("qwerty-token"))
+                       .decoder(new JsonDecoder())
+                       .target(IpInfo.class, IpInfo.API_LOCATOR);
+</code></pre>
+<p>The token is optional on free plan, see more on <a href="https://ipinfo.io/pricing">IPinfo's
+  pricing</a> page.</p>
+<p>Now you get details of your IP address</p>
+<pre><code class="language-java">
+  client.lookup(null);
+</code></pre>
+<p>or someone else</p>
+<pre><code class="language-java">
+  client.lookup("8.8.8.8")
+</code></pre>
+<p>The IPinfo supports IP6 addresses</p>
+<pre><code class="language-java">
+  client.lookup("2001:4860:4860::8888")
+</code></pre>
+<p>The volume of information depends on your plan, see <a
+    href="https://ipinfo.io/pricing#api-responses">some samples here</a>.</p>
 <h2>License</h2>
 <p>
   <code>ipinfo-api</code> is licensed under the <strong>Apache License v2.0</strong>
