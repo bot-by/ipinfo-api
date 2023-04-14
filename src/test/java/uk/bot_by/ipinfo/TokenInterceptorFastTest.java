@@ -1,4 +1,4 @@
-package io.gitlab.radio_rogal.ipinfo;
+package uk.bot_by.ipinfo;
 
 import static org.hamcrest.MatcherAssert.assertThat;
 import static org.hamcrest.Matchers.not;
