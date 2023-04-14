@@ -15,6 +15,8 @@
  */
 package io.gitlab.radio_rogal.ipinfo;
 
+import static java.util.Objects.nonNull;
+
 import feign.Feign;
 import feign.Headers;
 import feign.Param;
@@ -22,13 +24,14 @@ import feign.QueryMap;
 import feign.RequestLine;
 import feign.http2client.Http2Client;
 import feign.json.JsonDecoder;
+import java.util.Collections;
 import java.util.Map;
 import org.jetbrains.annotations.NotNull;
 import org.jetbrains.annotations.Nullable;
 import org.json.JSONObject;
 
 /**
- * A class representing a client of <a href="https://ipinfo.io/">IpInfo</a> service.
+ * A class representing a client of <a href="https://ipinfo.io/">IPinfo</a> service.
  * <p>
  * See the <a href="https://ipinfo.io/developers">Developer Documentation</a>.
  *
@@ -39,10 +42,34 @@ import org.json.JSONObject;
 public interface IpInfo {
 
   String API_LOCATOR = "https://ipinfo.io/";
+  String TOKEN = "token";
 
-  static IpInfo getInstance(@NotNull String token) {
-    return Feign.builder().client(new Http2Client()).decoder(new JsonDecoder())
-        .requestInterceptor(new TokenInterceptor(token)).target(IpInfo.class, API_LOCATOR);
+  /**
+   * Get an IPinfo client. If a token is null the client uses free plan.
+   *
+   * @param token IPinfo token, see
+   * @return IPinfo client
+   * @see <a href="https://ipinfo.io/pricing">Free, Basic, Standard, Business and Custom plans"</a>.
+   */
+  static IpInfo getInstance(@Nullable String token) {
+    var builder = Feign.builder();
+
+    builder.client(new Http2Client()).decoder(new JsonDecoder());
+    if (nonNull(token)) {
+      builder.requestInterceptor(new TokenInterceptor(token));
+    }
+
+    return builder.target(IpInfo.class, API_LOCATOR);
+  }
+
+  /**
+   * Get a token in the form of a query parameter.
+   *
+   * @param token token
+   * @return query map with a token
+   */
+  static Map<String, String> getToken(String token) {
+    return Collections.singletonMap(TOKEN, token);
   }
 
   /**
@@ -75,7 +102,7 @@ public interface IpInfo {
    */
   @RequestLine("GET /{ip}/{field}")
   @Headers("Accept: */*")
-  String lookupField(@Nullable @Param("ip") String address, @Param("field") IpInfoField field);
+  String lookup(@NotNull @Param("ip") String address, @Param("field") IpInfoField field);
 
   /**
    * Get a specific field with a custom token.
@@ -85,7 +112,7 @@ public interface IpInfo {
    */
   @RequestLine("GET /{ip}/{field}")
   @Headers("Accept: */*")
-  String lookupField(@Nullable @Param("ip") String address, @Param("field") IpInfoField field,
+  String lookup(@NotNull @Param("ip") String address, @Param("field") IpInfoField field,
       @QueryMap Map<String, String> parameters);
 
 }

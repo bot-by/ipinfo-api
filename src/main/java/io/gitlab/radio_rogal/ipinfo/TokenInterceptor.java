@@ -25,7 +25,6 @@ public class TokenInterceptor implements RequestInterceptor {
 
   private static final String AUTHORIZATION = "Authorization";
   private static final String BEARER = "Bearer ";
-  private static final String TOKEN = "token";
 
   private final String bearerToken;
   private final Logger logger = LoggerFactory.getLogger(getClass());
@@ -36,11 +35,11 @@ public class TokenInterceptor implements RequestInterceptor {
 
   @Override
   public void apply(RequestTemplate template) {
-    if (template.queries().containsKey(TOKEN) || (template.headers().containsKey(AUTHORIZATION))) {
-      logger.debug("token or header are found");
+    if (template.queries().containsKey(IpInfo.TOKEN) || (template.headers().containsKey(AUTHORIZATION))) {
+      logger.debug("token query parameter or authorization header are found");
     } else {
       template.header(AUTHORIZATION, bearerToken);
-      logger.debug("set an authorization header");
+      logger.debug("set the authorization header");
     }
   }
 

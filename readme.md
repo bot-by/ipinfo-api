@@ -1,35 +1,68 @@
-# ipinfo-api
+# IPinfo API
 
 Unofficial Java wrapper for [ipinfo.io][ipinfo] IP geolocation API.
 
-## Usage
+[![Codacy Badge](https://app.codacy.com/project/badge/Grade/f4683300eba94cc49633686512b56124)](https://app.codacy.com/gl/radio_rogal/ipinfo-api/dashboard?utm_source=gl&utm_medium=referral&utm_content=&utm_campaign=Badge_grade)
+[![Codacy Coverage](https://app.codacy.com/project/badge/Coverage/f4683300eba94cc49633686512b56124)](https://app.codacy.com/gl/radio_rogal/ipinfo-api/dashboard?utm_source=gl&utm_medium=referral&utm_content=&utm_campaign=Badge_coverage)
+[![Java Version](https://img.shields.io/static/v1?label=java&message=11&color=blue&logo=java&logoColor=E23D28)](https://www.oracle.com/java/technologies/javase-jdk11-downloads.html)
 
-It can look up:
+Table of Contents
+=================
 
-- own IP info,
-- any IP info,
-- short (geo) IP info.
+   * [Getting started](#getting-started)
+      * [Usage](#usage)
+   * [Contributing](#contributing)
+   * [History](#history)
+   * [License](#license)
 
-Just build a client with [Feign][feign].
+Created by [gh-md-toc](https://github.com/ekalinin/github-markdown-toc)
+
+## Getting started
+
+This can look up:
+
+- information about your own IP address or someone else,
+- short (one-field) information about IP address.
+
+### Usage
+
+You get a ready client
 
 ```java
-IpInfoClient client = Feign.builder()
-		.decoder(new JacksonDecoder())
-		.target(IpInfoClient.class, "http://ipinfo.io/");
-IpInfo info = client.lookup();
-
-log.info("my IP {}", info.getIp());
+IpInfo client = IpInfo.getInstance("qwerty-token");
 ```
 
-If you need only one field.
+or make your own with [Feign][feign] and [Java JSON][java-json]
 
 ```java
-log.info("now I am at {}", client.lookupField(IpInfoField.Country));
+IpInfo client = Feign.builder()
+                     .client(new Http2Client())
+                     .requestInterceptor(new TokenInterceptor("qwerty-token"))
+                     .decoder(new JsonDecoder())
+                     .target(IpInfo.class, IpInfo.API_LOCATOR);
 ```
 
-## To Do
+The token is optional on free plan, see more on  [IPinfo's pricing][pricing] page.
 
-* Add token for paid plans of [ipinfo.io][].
+Now you get details of your IP address;
+
+```java
+client.lookup(null);
+```
+
+or someone else
+
+```java
+client.lookup("8.8.8.8")
+```
+
+The IPinfo supports IP6 addresses
+
+```java
+client.lookup("2001:4860:4860::8888")
+```
+
+The volume of information depends on your plan, see [some samples here][api-responses].
 
 ## Contributing
 
@@ -60,4 +93,10 @@ limitations under the License.
 
 [ipinfo]: http://ipinfo.io "Comprehensive IP details website and API"
 
+[pricing]: https://ipinfo.io/pricing "Free, Basic, Standard and Business plans"
+
 [feign]: https://github.com/OpenFeign/feign "Feign makes writing java http clients easier"
+
+[java-json]: https://github.com/stleary/JSON-java "The JSON-Java package is a reference implementation"
+
+[api-responses]: https://ipinfo.io/pricing#api-responses "Sample API responses"

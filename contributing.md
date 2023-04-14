@@ -1,4 +1,4 @@
-# Contributing to ipinfo-api
+# Contributing to IPinfo API
 
 **ipinfo-api** is an open-source project and all contributions are welcome to assist with its
 development and maintenance.

@@ -19,8 +19,8 @@ import static java.util.Objects.isNull;
 
 public enum IpInfoField {
 
-  Abuse, Address("ip"), ASN, AnyCast(
-      "anycast"), Bogon, Carrier, City, Company, Country, Domains, Hostname, IP, Loc, Org, Postal, Privacy, Region, Timezone;
+  Address("ip"), AnyCast("anycast"), Bogon, City, Country, Hostname,
+  Location("loc"), Organisation("org"), Postal, Region, Timezone;
 
   private String fieldName;
 

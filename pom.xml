@@ -301,16 +301,16 @@
       <version>2.2</version>
     </dependency>
     <dependency>
+      <artifactId>feign-mock</artifactId>
+      <groupId>io.github.openfeign</groupId>
+      <scope>test</scope>
+      <version>${feign.version}</version>
+    </dependency>
+    <dependency>
       <artifactId>slf4j-simple</artifactId>
       <groupId>org.slf4j</groupId>
       <scope>test</scope>
       <version>${slf4j.version}</version>
-    </dependency>
-    <dependency>
-      <artifactId>feign-slf4j</artifactId>
-      <groupId>io.github.openfeign</groupId>
-      <scope>test</scope>
-      <version>${feign.version}</version>
     </dependency>
     <dependency>
       <artifactId>jsonassert</artifactId>
@@ -339,7 +339,7 @@
     </license>
   </licenses>
   <modelVersion>4.0.0</modelVersion>
-  <name>ipinfo-api</name>
+  <name>IPinfo API</name>
   <packaging>jar</packaging>
   <profiles>
     <profile>
@@ -444,7 +444,7 @@
     <junit-jupiter.version>5.9.2</junit-jupiter.version>
     <project.build.sourceEncoding>UTF-8</project.build.sourceEncoding>
     <project.reporting.outputEncoding>UTF-8</project.reporting.outputEncoding>
-    <revision>1.0.0</revision>
+    <revision>2.0.0</revision>
     <sha1/>
     <slf4j.version>2.0.7</slf4j.version>
   </properties>
