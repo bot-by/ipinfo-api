@@ -1,5 +1,5 @@
 /**
- * Provides the classes necessary to make requests to <a href="http://ipinfo.io/">IpInfo</a>
+ * Provides the classes necessary to make requests to <a href="http://ipinfo.io/">IPinfo</a>
  * service.
  *
  * @author Witalij Berdinskich
