@@ -5,6 +5,8 @@ Unofficial Java wrapper for [ipinfo.io][ipinfo] IP geolocation API.
 [![Codacy Badge](https://app.codacy.com/project/badge/Grade/2d65fe469c2a4e0da28cc8995c91234b)](https://app.codacy.com/gl/bot-by/ipinfo-api/dashboard?utm_source=gl&utm_medium=referral&utm_content=&utm_campaign=Badge_grade)
 [![Codacy Coverage](https://app.codacy.com/project/badge/Coverage/2d65fe469c2a4e0da28cc8995c91234b)](https://app.codacy.com/gl/bot-by/ipinfo-api/dashboard?utm_source=gl&utm_medium=referral&utm_content=&utm_campaign=Badge_coverage)
 [![Java Version](https://img.shields.io/static/v1?label=java&message=11&color=blue&logo=java&logoColor=E23D28)](https://www.oracle.com/java/technologies/javase-jdk11-downloads.html)
+[![Maven Central](https://img.shields.io/maven-central/v/uk.bot-by.ip-address/ipinfo-api)](https://central.sonatype.com/artifact/uk.bot-by.ip-address/ipinfo-api/)
+[![Javadoc](https://javadoc.io/badge2/uk.bot-by.ip-address/ipinfo-api/javadoc.svg)](https://javadoc.io/doc/uk.bot-by.ip-address/ipinfo-api)
 
 Table of Contents
 =================
