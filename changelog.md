@@ -4,13 +4,19 @@ All notable changes to this project will be documented in this file.
 The format is based on [Keep a Changelog](http://keepachangelog.com/)
 and this project adheres to [Semantic Versioning](http://semver.org/).
 
-## Unreleased
+## 1.0.0 - 2023-04-16 Easter Egg
+### Added
+- Idea project.
+- GitLab, CodeQL and Dependabot workflows.
+- Deploy to Maven Central.
 ### Changed
 - Replace Jackson with Java JSON.
+- Move to bot-by.
 - Update Feign.
-- Deploy to Maven Central.
+- Update plugins and dependencies.
+- Improve documentation.
 
-## 1.0.0 - 2017-01-20
+## ~~1.0.0~~ - 2017-01-20
 ### Added
 - Add client interface.
 - Add full (info) and short (geo) beans.

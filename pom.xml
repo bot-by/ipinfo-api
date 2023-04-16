@@ -243,6 +243,10 @@
       </resource>
     </resources>
   </build>
+  <ciManagement>
+    <system>GitLab</system>
+    <url>https://gitlab.com/bot-by/ipinfo-api/-/pipelines</url>
+  </ciManagement>
   <dependencies>
     <dependency>
       <artifactId>annotations</artifactId>
@@ -449,6 +453,11 @@
     <sha1/>
     <slf4j.version>2.0.7</slf4j.version>
   </properties>
+  <scm>
+    <connection>scm:git:https://gitlab.com/bot-by/ipinfo-api.git</connection>
+    <developerConnection>scm:git:git@gitlab.com:bot-by/ipinfo-api.git</developerConnection>
+    <url>https://gitlab.com/bot-by/ipinfo-api</url>
+  </scm>
   <url>https://gitlab.com/bot-by/ipinfo-api</url>
   <version>${revision}${changelist}${sha1}</version>
 </project>
