@@ -1,4 +1,4 @@
-package uk.bot_by.ipinfo;
+package uk.bot_by.ipinfo_api;
 
 import static java.nio.charset.StandardCharsets.UTF_8;
 import static org.hamcrest.MatcherAssert.assertThat;

@@ -5,4 +5,4 @@
  * @author Witalij Berdinskich
  * @since 1.0.0
  */
-package uk.bot_by.ipinfo;
+package uk.bot_by.ipinfo_api;

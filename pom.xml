@@ -251,9 +251,9 @@
       <version>24.0.1</version>
     </dependency>
     <dependency>
-      <artifactId>slf4j-api</artifactId>
-      <groupId>org.slf4j</groupId>
-      <version>${slf4j.version}</version>
+      <artifactId>json</artifactId>
+      <groupId>org.json</groupId>
+      <version>${json.version}</version>
     </dependency>
     <dependency>
       <artifactId>feign-core</artifactId>
@@ -271,9 +271,9 @@
       <version>${feign.version}</version>
     </dependency>
     <dependency>
-      <artifactId>json</artifactId>
-      <groupId>org.json</groupId>
-      <version>20230227</version>
+      <artifactId>slf4j-api</artifactId>
+      <groupId>org.slf4j</groupId>
+      <version>${slf4j.version}</version>
     </dependency>
     <!-- test -->
     <dependency>
@@ -383,7 +383,7 @@
               <isOffline>false</isOffline>
               <javadocExecutable>${java.home}/bin/javadoc</javadocExecutable>
               <links>
-                <link>https://javadoc.io/doc/org.slf4j/slf4j-api/${slf4j.version}/</link>
+                <link>https://javadoc.io/doc/org.json/json/${json.version}/</link>
               </links>
               <show>public</show>
               <top><![CDATA[
@@ -442,6 +442,7 @@
     <feign.version>12.3</feign.version>
     <jackson.version>2.14.2</jackson.version>
     <junit-jupiter.version>5.9.2</junit-jupiter.version>
+    <json.version>20230227</json.version>
     <project.build.sourceEncoding>UTF-8</project.build.sourceEncoding>
     <project.reporting.outputEncoding>UTF-8</project.reporting.outputEncoding>
     <revision>1.0.0</revision>

@@ -1,4 +1,4 @@
-package uk.bot_by.ipinfo;
+package uk.bot_by.ipinfo_api;
 
 import static org.hamcrest.MatcherAssert.assertThat;
 import static org.hamcrest.collection.IsMapContaining.hasEntry;
