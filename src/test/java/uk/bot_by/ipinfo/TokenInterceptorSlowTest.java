@@ -1,5 +1,6 @@
 package uk.bot_by.ipinfo;
 
+import static java.nio.charset.StandardCharsets.UTF_8;
 import static org.hamcrest.MatcherAssert.assertThat;
 import static org.hamcrest.Matchers.not;
 import static org.hamcrest.collection.IsIterableContainingInOrder.contains;
@@ -31,7 +32,7 @@ class TokenInterceptorSlowTest {
   void addAuthorizationHeader() throws IOException {
     // given
     var tokenInterceptor = new TokenInterceptor("qwerty");
-    var responseBody = Files.readAllBytes(Path.of("src/test/resources/google-dns.json"));
+    var responseBody = Files.readString(Path.of("src/test/resources/google-dns.json"), UTF_8);
     var mockClient = new MockClient().ok(HttpMethod.GET, "https://ipinfo.io/8.8.8.8", responseBody);
     var client = Feign.builder().client(mockClient).decoder(new JsonDecoder())
         .requestInterceptor(tokenInterceptor).target(IpInfo.class, IpInfo.API_LOCATOR);
@@ -53,7 +54,7 @@ class TokenInterceptorSlowTest {
   void authorizationHeader() throws IOException {
     // given
     var tokenInterceptor = new TokenInterceptor("qwerty");
-    var responseBody = Files.readAllBytes(Path.of("src/test/resources/google-dns.json"));
+    var responseBody = Files.readString(Path.of("src/test/resources/google-dns.json"), UTF_8);
     var mockClient = new MockClient().ok(HttpMethod.GET, "https://ipinfo.io/8.8.8.8", responseBody);
     var client = Feign.builder().client(mockClient).decoder(new JsonDecoder())
         .requestInterceptor(tokenInterceptor).target(IpInfoHeaderTest.class, IpInfo.API_LOCATOR);
@@ -74,7 +75,7 @@ class TokenInterceptorSlowTest {
   void queryParameter() throws IOException {
     // given
     var tokenInterceptor = new TokenInterceptor("qwerty");
-    var responseBody = Files.readAllBytes(Path.of("src/test/resources/google-dns.json"));
+    var responseBody = Files.readString(Path.of("src/test/resources/google-dns.json"), UTF_8);
     var mockClient = new MockClient().ok(HttpMethod.GET, "https://ipinfo.io/8.8.8.8?token=xzy",
         responseBody);
     var client = Feign.builder().client(mockClient).decoder(new JsonDecoder())
@@ -90,7 +91,7 @@ class TokenInterceptorSlowTest {
   }
 
   @Headers({"Authorization: abc"})
-  static interface IpInfoHeaderTest {
+  interface IpInfoHeaderTest {
 
     @RequestLine("GET /{ip}")
     @Headers("Accept: application/json")

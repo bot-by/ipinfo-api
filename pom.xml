@@ -124,7 +124,7 @@
         <configuration>
           <archive>
             <manifestEntries>
-              <Automatic-Module-Name>io.gitlab.radio_rogal.ipinfo</Automatic-Module-Name>
+              <Automatic-Module-Name>uk.bot_by.ipinfo_api</Automatic-Module-Name>
             </manifestEntries>
           </archive>
         </configuration>
@@ -328,7 +328,7 @@
       <timezone>Europe/Kyiv</timezone>
     </developer>
   </developers>
-  <groupId>io.gitlab.radio-rogal</groupId>
+  <groupId>uk.bot-by.ip-address</groupId>
   <inceptionYear>2017</inceptionYear>
   <licenses>
     <license>
@@ -444,10 +444,10 @@
     <junit-jupiter.version>5.9.2</junit-jupiter.version>
     <project.build.sourceEncoding>UTF-8</project.build.sourceEncoding>
     <project.reporting.outputEncoding>UTF-8</project.reporting.outputEncoding>
-    <revision>2.0.0</revision>
+    <revision>1.0.0</revision>
     <sha1/>
     <slf4j.version>2.0.7</slf4j.version>
   </properties>
-  <url>https://gitlab.com/radio_rogal/ipinfo-api</url>
+  <url>https://gitlab.com/bot-by/ipinfo-api</url>
   <version>${revision}${changelist}${sha1}</version>
 </project>

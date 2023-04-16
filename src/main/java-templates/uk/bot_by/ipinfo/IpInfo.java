@@ -47,7 +47,7 @@ public interface IpInfo {
   /**
    * Get an IPinfo client. If a token is null the client uses free plan.
    *
-   * @param token IPinfo token, see
+   * @param token IPinfo token
    * @return IPinfo client
    * @see <a href="https://ipinfo.io/pricing">Free, Basic, Standard, Business and Custom plans"</a>.
    */
@@ -65,7 +65,7 @@ public interface IpInfo {
   /**
    * Get a token in the form of a query parameter.
    *
-   * @param token token
+   * @param token IPinfo token
    * @return query map with a token
    */
   static Map<String, String> getToken(String token) {
@@ -76,7 +76,7 @@ public interface IpInfo {
    * Get full details about the IP address.
    *
    * @param address target IP
-   * @return IP details
+   * @return query map with a token
    */
   @RequestLine("GET /{ip}")
   @Headers("Accept: application/json")
@@ -88,6 +88,7 @@ public interface IpInfo {
    * @param address    target IP
    * @param parameters map contains at least a token
    * @return IP details
+   * @see #getToken(String)
    */
   @RequestLine("GET /{ip}")
   @Headers("Accept: application/json")
@@ -97,7 +98,8 @@ public interface IpInfo {
   /**
    * Get a specific field.
    *
-   * @param field a specific field
+   * @param address target IP
+   * @param field   a specific field
    * @return value of a specific field
    */
   @RequestLine("GET /{ip}/{field}")
@@ -107,8 +109,11 @@ public interface IpInfo {
   /**
    * Get a specific field with a custom token.
    *
-   * @param field a specific field
+   * @param address    target IP
+   * @param field      a specific field
+   * @param parameters map contains at least a token
    * @return value of a specific field
+   * @see #getToken(String)
    */
   @RequestLine("GET /{ip}/{field}")
   @Headers("Accept: */*")

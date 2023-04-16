@@ -4,8 +4,8 @@ Please read this!
 Before opening a new issue, make sure to search for keywords in the issues
 filtered by the "enhancement" and "suggestion" labels:
 
-- https://gitlab.com/radio_rogal/ipinfo-api/-/issues/?label_name%5B%5D=enhancement
-- https://gitlab.com/radio_rogal/ipinfo-api/-/issues/?label_name%5B%5D=suggestion
+- https://gitlab.com/bot-by/ipinfo-api/-/issues/?label_name%5B%5D=enhancement
+- https://gitlab.com/bot-by/ipinfo-api/-/issues/?label_name%5B%5D=suggestion
 
 and verify the issue you're about to submit isn't a duplicate.
 --->

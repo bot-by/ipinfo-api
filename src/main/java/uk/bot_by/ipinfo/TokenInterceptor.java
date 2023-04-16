@@ -35,7 +35,8 @@ public class TokenInterceptor implements RequestInterceptor {
 
   @Override
   public void apply(RequestTemplate template) {
-    if (template.queries().containsKey(IpInfo.TOKEN) || (template.headers().containsKey(AUTHORIZATION))) {
+    if (template.queries().containsKey(IpInfo.TOKEN) || (template.headers()
+        .containsKey(AUTHORIZATION))) {
       logger.debug("token query parameter or authorization header are found");
     } else {
       template.header(AUTHORIZATION, bearerToken);
