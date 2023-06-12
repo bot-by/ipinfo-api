@@ -445,8 +445,8 @@
     <changelist>-SNAPSHOT</changelist>
     <feign.version>12.3</feign.version>
     <jackson.version>2.14.2</jackson.version>
-    <junit-jupiter.version>5.9.3</junit-jupiter.version>
     <json.version>20230227</json.version>
+    <junit-jupiter.version>5.9.3</junit-jupiter.version>
     <project.build.sourceEncoding>UTF-8</project.build.sourceEncoding>
     <project.reporting.outputEncoding>UTF-8</project.reporting.outputEncoding>
     <revision>1.0.0</revision>

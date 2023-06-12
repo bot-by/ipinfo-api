@@ -20,14 +20,14 @@ stages:
 build:
   stage: build
   script:
-    - mvn $MAVEN_CLI_OPTS clean compile
+    - ./mvnw $MAVEN_CLI_OPTS clean compile
   except:
     - tags
 
 test:
   stage: test
   script:
-    - mvn $MAVEN_CLI_OPTS verify
+    - ./mvnw $MAVEN_CLI_OPTS verify
   artifacts:
     reports:
       junit:
@@ -57,6 +57,6 @@ codacy:
 release:
   stage: deploy
   script:
-    - mvn $MAVEN_CLI_OPTS -s ci_settings.xml clean deploy -Dchangelist= -ntp -Psources,javadocs,sign-and-deploy
+    - ./mvnw $MAVEN_CLI_OPTS -s ci_settings.xml clean deploy -Dchangelist= -ntp -Psources,javadocs,sign-and-deploy
   only:
     - tags
