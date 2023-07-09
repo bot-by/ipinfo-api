@@ -443,7 +443,7 @@
   </profiles>
   <properties>
     <changelist>-SNAPSHOT</changelist>
-    <feign.version>12.3</feign.version>
+    <feign.version>12.4</feign.version>
     <jackson.version>2.14.2</jackson.version>
     <json.version>20230618</json.version>
     <junit-jupiter.version>5.9.3</junit-jupiter.version>
